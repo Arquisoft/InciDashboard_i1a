@@ -1,4 +1,4 @@
-package hello;
+package com.uniovi.asw;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
