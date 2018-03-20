@@ -5,6 +5,10 @@
 <body>
 <h1>Dashboard0 skeleton</h1>
 <h2>Receiving messages for you:</h2>
-<div id="messages"></div>
+<div id="messages">
+<ul th:each="msg : ${messages}">
+<li th:text="${msg}"></li>
+</ul>
+</div>
 </body>
 </html>
