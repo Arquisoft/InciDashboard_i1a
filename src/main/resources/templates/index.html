@@ -1,14 +1,23 @@
 <html>
 <head>
-<title>Hola</title>
+<title>Dashboard</title>
 </head>
 <body>
-<h1>Dashboard0 skeleton</h1>
-<h2>Receiving messages for you:</h2>
-<div id="messages">
-<ul th:each="msg : ${messages}">
-<li th:text="${msg}"></li>
-</ul>
-</div>
+	<h1>Dashboard 1a1</h1>
+	<h2>Receiving messages for you:</h2>
+	<div id="messages">
+		<thead>
+			<tr>
+				<th>Topic</th>
+				<th>Message</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="msg : ${messages}">
+				<td th:text="${msg.topic}"></td>
+				<td th:text="${msg.message}"></td>
+			</tr>
+		</tbody>
+	</div>
 </body>
 </html>
