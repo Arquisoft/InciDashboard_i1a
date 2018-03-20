@@ -14,4 +14,8 @@ public class Message {
 		this.message = msg;
 		this.topic = topic;
 	}
+
+	public String getTopic() {
+		return topic;
+	}
 }
