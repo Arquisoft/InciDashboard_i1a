@@ -6,20 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uniovi.asw.entities.Operator;
-import com.uniovi.asw.repositories.OperatorRepository;
 
 @Service
 public class InsertSampleDataService {
 
 	@Autowired
-	private OperatorRepository operatorRepository;
+	private OperatorService operatorService;
 	
 	
 	@PostConstruct
 	public void init()
 	{
 		Operator admin = new Operator("admin", "admin");
-		operatorRepository.save(admin);
+		operatorService.saveOperator(admin);
 	}
 	
 }

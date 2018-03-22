@@ -1,13 +1,15 @@
 package com.uniovi.asw.entities;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
-@Document(collection = "OPERATORS")
+@Entity
 public class Operator {
 	
 	@Id
-	private String id;
+	@GeneratedValue
+	private Long id;
 	private String username;
 	private String password;
 	
@@ -20,10 +22,10 @@ public class Operator {
 	
 	}
 	
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getUsername() {
