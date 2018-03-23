@@ -1,46 +1,36 @@
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js">
+	<meta charset="utf-8">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	
-</script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+	<title>Log into InciDashboard</title>
 	
-</script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	<!-- Bootstrap core CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	
+	<!-- Using some scripts -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	
+	<!-- Custom styles for this template -->
+	<link href="/css/custom.css" rel="stylesheet">
 </head>
-<body>
-	<div class="container">
-		<h2>Idéntificate</h2>
-		<form class="form-horizontal" method="post" action="/login">
-			<div class="form-group">
-				<label class="control-label col-sm-2" for="username">Username:</label>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" name="username"
-						placeholder="Ejemplo: profSDI" required="true" />
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-2" for="username">Password:</label>
-				<div class="col-sm-10">
-					<input type="password" class="form-control" name="password"
-						placeholder="Entre el Password" required="true" />
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" class="btn btn-primary">Login</button>
-				</div>
-			</div>
-			<input type="hidden" name="${_csrf.parameterName}"
-				value="${_csrf.token}" />
-		</form>
-	</div>
+
+<body class="text-center">
+	<form class="form-signin" method="post" action="/login">
+		<img class="mb-4" src="/img/inc_support_icon.png" alt="" width="72" height="72">
+		<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+		<label for="inputUser" class="sr-only">Username</label>
+		<input type="text" id="inputUser" name="username" class="form-control" placeholder="Username" required autofocus>
+		<label for="inputPassword" class="sr-only">Password</label>
+		<input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
+		<button class="btn btn-lg btn-dark btn-block" type="submit">Sign in</button>
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+		<p class="mt-5 mb-3 text-muted">&copy; InciDashboard_i1a - 2018</p>
+	</form>
 </body>
 </html>
