@@ -8,7 +8,7 @@ import javax.annotation.ManagedBean;
 import org.apache.log4j.Logger;
 import org.springframework.kafka.annotation.KafkaListener;
 
-import com.uniovi.entities.Message;
+import com.uniovi.asw.entities.Message;
 
 /**
  * Created by herminio on 28/12/16.
