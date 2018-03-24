@@ -3,6 +3,7 @@
 
 # InciDashboard_i1a
 InciDashboard_i1a
+Incident Dashboard reading incidents sent from the IncidentManagement module through Apache Kafka
 
 #Team members
 - Pedro Blanco Suárez (UO251935)
