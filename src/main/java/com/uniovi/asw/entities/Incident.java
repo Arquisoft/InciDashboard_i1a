@@ -3,11 +3,21 @@ package com.uniovi.asw.entities;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Incident {
+	@Id
+	@GeneratedValue
+	private Long id;
+	
 	private AgentInfo agentInfo;
 	private String incidentName;
 	private String description;
 	private String location;
+	
 	private List<String> tags;
 	private Map<String, String> aditionalProperties;
 	private String topic;
