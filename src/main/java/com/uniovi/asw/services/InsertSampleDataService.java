@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 
 import com.uniovi.asw.entities.Agent;
 import com.uniovi.asw.entities.Incident;
-import com.uniovi.asw.entities.Operator;
 import com.uniovi.asw.entities.Incident.IncidentStatus;
+import com.uniovi.asw.entities.Operator;
 
 @Service
 public class InsertSampleDataService {
@@ -26,6 +26,9 @@ public class InsertSampleDataService {
 	
 	@Autowired
 	private AgentService agentService;
+	
+	@Autowired
+	private TopicService topicsService;
 
 	@PostConstruct
 	public void init() {
@@ -57,9 +60,10 @@ public class InsertSampleDataService {
 		Map<String, String> incident1Props = new HashMap<String, String>();
 		incident1Props.put("p1", "property1");
 		incident1Props.put("p2", "property2");
+		String topic1 = topicsService.getTopics()[1]; //fire
 		Incident incident1 = new Incident(agent1, "Fire in Tineo", "Fire in a land near Tineo, Asturias.", 
 				"43.311312,-6.415061", new Date(), incident1Tags,
-				incident1Props, "fire", IncidentStatus.OPEN);
+				incident1Props, topic1, IncidentStatus.OPEN);
 		incidentService.saveIncident(incident1);
 		
 		/*
@@ -71,9 +75,10 @@ public class InsertSampleDataService {
 		Map<String, String> incident2Props = new HashMap<String, String>();
 		incident2Props.put("p1", "property1");
 		incident2Props.put("p2", "property2");
+		String topic2 = topicsService.getTopics()[0]; //accident
 		Incident incident2 = new Incident(agent3, "Car accident in Mieres", "Car crash at A-66 near Mieres, Asturias.", 
 				"43.248067,-5.780542", new Date(), incident2Tags,
-				incident2Props, "accident", IncidentStatus.IN_PROCESS);
+				incident2Props, topic2, IncidentStatus.IN_PROCESS);
 		incidentService.saveIncident(incident2);
 		
 		/*
@@ -85,9 +90,10 @@ public class InsertSampleDataService {
 		Map<String, String> incident3Props = new HashMap<String, String>();
 		incident3Props.put("p1", "property1");
 		incident3Props.put("p2", "property2");
+		String topic3 = topicsService.getTopics()[4]; //metheorological phenomenon
 		Incident incident3 = new Incident(agent2, "Thick snow in Pajares", "Thick snow and ice plates near Pajares port.", 
 				"42.995561,-5.755010", new Date(), incident3Tags,
-				incident3Props, "snow", IncidentStatus.IN_PROCESS);
+				incident3Props, topic3, IncidentStatus.IN_PROCESS);
 		incidentService.saveIncident(incident3);
 		
 		/*
@@ -99,9 +105,10 @@ public class InsertSampleDataService {
 		Map<String, String> incident4Props = new HashMap<String, String>();
 		incident4Props.put("p1", "property1");
 		incident4Props.put("p2", "property2");
+		String topic4 = topicsService.getTopics()[0]; //accident
 		Incident incident4 = new Incident(agent2, "Car accident in Gijon", "Car crash near Viesques, Gijon.", 
 				"43.524733,-5.639690", new Date(), incident4Tags,
-				incident4Props, "accident", IncidentStatus.CLOSED);
+				incident4Props, topic4, IncidentStatus.CLOSED);
 		incidentService.saveIncident(incident4);
 		
 		/*
@@ -113,9 +120,10 @@ public class InsertSampleDataService {
 		Map<String, String> incident5Props = new HashMap<String, String>();
 		incident5Props.put("p1", "property1");
 		incident5Props.put("p2", "property2");
+		String topic5 = topicsService.getTopics()[1]; //fire
 		Incident incident5 = new Incident(agent2, "Fire in Aviles", "Fire in a shed near Aviles port.", 
 				"43.575120,-5.925035", new Date(), incident5Tags,
-				incident5Props, "fire", IncidentStatus.CLOSED);
+				incident5Props, topic5, IncidentStatus.CLOSED);
 		incidentService.saveIncident(incident5);
 	}
 
