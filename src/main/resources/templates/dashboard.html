@@ -21,28 +21,41 @@
 
 <body>
 	<main role="main" class="container">
-		<h1>Dashboard 1a1</h1>
-		<div class="card">
-		<div class="card-header">Receiving messages for you:</div>
-		<div class="card-body">
-		    <thead>
-				<tr>
-					<th>Topic</th>
-					<th>Message</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="msg : ${messages}">
-					<td th:text="${msg.topic}"></td>
-					<td th:text="${msg.message}"></td>
-				</tr>
-			</tbody>
-		</div>
-		</div>
+		<h1 class="mt-5"><img src="/img/inc_light_icon.png" alt="" width="60"> InciDashboard i1a</h1>
+		<p class="lead">You're logged into the incident dashboard.</p>
 	</main>
+	<div class="card ml-5 mr-5">
+		<div class="card-header"><h2>Last incidents received</h2></div>
+		<div class="card-body">
+			<table class="table table-hover">
+	  			<thead class="thead-light">
+	    			<tr>
+			        	<th scope="col">ID</th>
+			      		<th scope="col">Assigned agent</th>
+			      		<th scope="col">Name</th>
+			      		<th scope="col">Location</th>
+			      		<th scope="col">Date</th>
+			      		<th scope="col">Topic</th>
+			      		<th scope="col">Status</th>
+					</tr>
+	  			</thead>
+	  			<tbody>
+				    <tr th:each="incident : ${incidentsList}">
+					    <th scope="row" th:text="${incident.id}">ID</th>
+					    <td th:text="${incident.agent.userName}">Agent name</td>
+					    <td th:text="${incident.incidentName}">Incident name</td>
+					    <td th:text="${incident.location}">Incident location</td>
+					    <td th:text="${incident.date}">Incident date</td>
+					    <td th:text="${incident.topic}">Incident topic</td>
+					    <td th:text="${incident.status}">Incident status</td>
+				    </tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 	<footer class="footer">
     	<div class="container">
-        	<span class="text-muted" th:text="${'Logged as: ' + loggedUser}">Place sticky footer content here.</span>
+        	<span class="text-muted" th:text="${'Logged as: ' + loggedUser}">Logged as: someone</span>
     	</div>
     </footer>
 </body>

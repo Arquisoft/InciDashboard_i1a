@@ -127,5 +127,9 @@ public class Incident {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+	
+	public Long getId() {
+		return id;
+	}
 
 }

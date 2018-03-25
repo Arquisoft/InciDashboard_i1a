@@ -106,7 +106,7 @@ public class InsertSampleDataService {
 		incident4Props.put("p1", "property1");
 		incident4Props.put("p2", "property2");
 		String topic4 = topicsService.getTopics()[0]; //accident
-		Incident incident4 = new Incident(agent2, "Car accident in Gijon", "Car crash near Viesques, Gijon.", 
+		Incident incident4 = new Incident(agent3, "Car accident in Gijon", "Car crash near Viesques, Gijon.", 
 				"43.524733,-5.639690", new Date(), incident4Tags,
 				incident4Props, topic4, IncidentStatus.CLOSED);
 		incidentService.saveIncident(incident4);
