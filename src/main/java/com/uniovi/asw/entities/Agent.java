@@ -1,13 +1,28 @@
 package com.uniovi.asw.entities;
 
-public class AgentInfo {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
+public class Agent {
+	
+	@Id
+	@GeneratedValue
+	private Long id;
 	
 	private String userName;
 	private String password;
 	private String location;
 	
-	public AgentInfo() {
+	public Agent() {
 		
+	}
+	
+	public Agent(String userName, String password, String location) {
+		this.userName = userName;
+		this.password = password;
+		this.location = location;
 	}
 
 	public String getUserName() {

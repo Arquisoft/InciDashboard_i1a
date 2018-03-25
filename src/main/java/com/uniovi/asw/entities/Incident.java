@@ -1,33 +1,60 @@
 package com.uniovi.asw.entities;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
+@Entity
 public class Incident {
+
+	@Id
+	@GeneratedValue
+	private Long id;
 	
-	private AgentInfo agentInfo;
+	private Agent agent;
+
 	private String incidentName;
 	private String description;
 	private String location;
-	
+	private Date date;
+
 	private List<String> tags;
 	private Map<String, String> aditionalProperties;
 	private String topic;
-	private Status status;
-	
-	public enum Status{OPEN, IN_PROCESS, CLOSED, CANCELLED};
-	
+	private IncidentStatus status;
+
+	public enum IncidentStatus {
+		OPEN, IN_PROCESS, CLOSED, CANCELLED
+	};
+
+	public Incident(Agent agent, String incidentName, String description, String location, Date date,
+			ArrayList<String> tags, Map<String, String> aditionalProperties, String topic, IncidentStatus status) {
+		this.agent = agent;
+		this.incidentName = incidentName;
+		this.description = description;
+		this.location = location;
+		this.date = date;
+		this.tags = tags;
+		this.aditionalProperties = aditionalProperties;
+		this.topic = topic;
+		this.status = status;
+	}
+
 	public Incident() {
-		
+
 	}
 
-	public AgentInfo getAgentInfo() {
-		return agentInfo;
+	public Agent getAgent() {
+		return agent;
 	}
 
-	public void setAgentInfo(AgentInfo agentInfo) {
-		this.agentInfo = agentInfo;
+	public void setAgent(Agent agent) {
+		this.agent = agent;
 	}
 
 	public String getIncidentName() {
@@ -78,12 +105,20 @@ public class Incident {
 		this.topic = topic;
 	}
 
-	public Status getStatus() {
+	public IncidentStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(Status status) {
+	public void setStatus(IncidentStatus status) {
 		this.status = status;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 }
