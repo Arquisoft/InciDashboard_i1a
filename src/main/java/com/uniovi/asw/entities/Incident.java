@@ -2,12 +2,11 @@ package com.uniovi.asw.entities;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Incident {
@@ -16,6 +15,8 @@ public class Incident {
 	@GeneratedValue
 	private Long id;
 	
+	@ManyToOne
+	@JoinColumn(name="agent_id")
 	private Agent agent;
 
 	private String incidentName;
@@ -23,9 +24,15 @@ public class Incident {
 	private String location;
 	private Date date;
 
-	private List<String> tags;
-	private Map<String, String> aditionalProperties;
+	@ElementCollection(targetClass=String.class)
+	private List<String> tags = new ArrayList<String>();
+	
+	@ElementCollection(targetClass=String.class)
+	private Map<String, String> aditionalProperties = new HashMap<String, String>();
+	
 	private String topic;
+	
+	@Enumerated(EnumType.STRING)
 	private IncidentStatus status;
 
 	public enum IncidentStatus {
