@@ -1,49 +1,104 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport"
-		content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	
-	<title>InciDashboard i1a</title>
-	
-	<!-- Bootstrap core CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	
-	<!-- Using some scripts -->
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-	
-	<!-- Custom styles for this template -->
-	<link href="/css/custom-dashboard.css" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>InciDashboard i1a</title>
+
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+
+<!-- Using some scripts -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	crossorigin="anonymous"></script>
+
+<script src="/script/Chart.js"></script>
+
+<!-- Custom styles for this template -->
+<link href="/css/custom-dashboard.css" rel="stylesheet">
 </head>
 
 <body>
 	<main role="main" class="container">
-		<h1>Dashboard 1a1</h1>
-		<div class="card">
-		<div class="card-header">Receiving messages for you:</div>
-		<div class="card-body">
-		    <thead>
-				<tr>
-					<th>Topic</th>
-					<th>Message</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="msg : ${messages}">
-					<td th:text="${msg.topic}"></td>
-					<td th:text="${msg.message}"></td>
-				</tr>
-			</tbody>
+	<h1>Dashboard 1a1</h1>
+	<div class="panel panel-default">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Topics graph</div>
+			<div class="panel-body">
+				<div class="container">
+					<canvas id="myChart" width="400" height="400"></canvas>
+				</div>
+				<script type="text/javascript" th:inline="javascript">
+					/*<![CDATA[*/
+					var ctx = document.getElementById("myChart").getContext(
+							'2d');
+					var myChart = new Chart(
+							ctx,
+							{
+								type : 'bar',
+								data : {
+									labels : [ "Accident", "Fire", "Alterc",
+											"Medical", "Metheo", "Other" ],
+									datasets : [ {
+										label : 'Number of incidents',
+										data : [
+												"[[${countIncidents.get('ACCIDENT')}]]",
+												"[[${countIncidents.get('FIRE')}]]",
+												"[[${countIncidents.get('ALTERCATION')}]]",
+												"[[${countIncidents.get('MEDICAL_EMERGENCY')}]]",
+												"[[${countIncidents.get('METEOROLOGICAL_PHENOMENON')}]]",
+												"[[${countIncidents.get('OTHER')}]]" ],
+										backgroundColor : [
+												'rgba(255, 99, 132, 0.2)',
+												'rgba(54, 162, 235, 0.2)',
+												'rgba(255, 206, 86, 0.2)',
+												'rgba(75, 192, 192, 0.2)',
+												'rgba(153, 102, 255, 0.2)',
+												'rgba(255, 159, 64, 0.2)' ],
+										borderColor : [ 'rgba(255,99,132,1)',
+												'rgba(54, 162, 235, 1)',
+												'rgba(255, 206, 86, 1)',
+												'rgba(75, 192, 192, 1)',
+												'rgba(153, 102, 255, 1)',
+												'rgba(255, 159, 64, 1)' ],
+										borderWidth : 1
+									} ]
+								},
+								options : {
+									scales : {
+										yAxes : [ {
+											ticks : {
+												beginAtZero : true
+											}
+										} ]
+									}
+								}
+							});
+					/*]]>*/
+				</script>
+			</div>
 		</div>
-		</div>
+	</div>
 	</main>
 	<footer class="footer">
-    	<div class="container">
-        	<span class="text-muted" th:text="${'Logged as: ' + loggedUser}">Place sticky footer content here.</span>
-    	</div>
-    </footer>
+		<div class="container">
+			<span class="text-muted" th:text="${'Logged as: ' + loggedUser}">Place
+				sticky footer content here.</span>
+		</div>
+	</footer>
 </body>
 </html>
