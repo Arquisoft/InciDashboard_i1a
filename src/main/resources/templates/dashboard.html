@@ -37,7 +37,7 @@
 		<h1 class="mt-5"><img src="/img/inc_light_icon.png" alt="" width="60"> InciDashboard i1a</h1>
 		<p class="lead" th:text="${'Welcome to the incidents dashboard. You are logged as: ' + loggedUser}">Welcome to the incidents dashboard. Logged as: someone</p>
 	</main>
-	<div class="row ml-5 mr-5">
+	<div class="row ml-4 mr-4 mt-4">
 		<div class="col-sm-6">
 			<div class="card">
 				<div class="card-header"><h3>Topic barchart</h3></div>
@@ -55,7 +55,7 @@
 								type : 'bar',
 								data : {
 									labels : [ "Accident", "Fire", "Alterc",
-											"Medical", "Metheo", "Other" ],
+											"Medical", "Meteo", "Other" ],
 									datasets : [ {
 										label : 'Number of incidents',
 										data : [
@@ -120,6 +120,7 @@
 			      		<th scope="col">Date</th>
 			      		<th scope="col">Topic</th>
 			      		<th scope="col">Status</th>
+			      		<th scope="col">Options</th>
 					</tr>
 	  			</thead>
 	  			<tbody>
@@ -131,6 +132,13 @@
 					    <td th:text="${incident.date}">Incident date</td>
 					    <td th:text="${incident.topic}">Incident topic</td>
 					    <td th:text="${incident.status}">Incident status</td>
+					    <td>
+							<div class="btn-group" role="group" aria-label="Options">
+								<button type="button" class="btn btn-secondary">Details</button>
+								<button type="button" class="btn btn-secondary">Option 2</button>
+								<button type="button" class="btn btn-secondary">Option 3</button>
+							</div>
+						</td>
 				    </tr>
 				</tbody>
 			</table>
