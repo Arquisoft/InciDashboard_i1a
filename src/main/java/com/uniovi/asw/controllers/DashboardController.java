@@ -27,10 +27,12 @@ public class DashboardController {
 		List<Incident> incidentsList = incidentService.getIncidents();
 		
 		Map<String, Integer> countIncidents = incidentService.getCountByTopic(incidentsList);
+		Map<String, Integer> countStatus = incidentService.getCountByStatus(incidentsList);
 		
 		model.addAttribute("incidentsList", incidentsList);
 		model.addAttribute("loggedUser", loggedUser);
 		model.addAttribute("countIncidents", countIncidents);
+		model.addAttribute("countStatus", countStatus);
 		return "dashboard";
 	}
 
