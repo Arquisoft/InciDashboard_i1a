@@ -1,6 +1,7 @@
 package com.uniovi.asw.controllers;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -22,9 +23,14 @@ public class DashboardController {
 	public String landing(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String loggedUser = auth.getName();
+		
 		List<Incident> incidentsList = incidentService.getIncidents();
+		
+		Map<String, Integer> countIncidents = incidentService.getCountByTopic(incidentsList);
+		
 		model.addAttribute("incidentsList", incidentsList);
 		model.addAttribute("loggedUser", loggedUser);
+		model.addAttribute("countIncidents", countIncidents);
 		return "dashboard";
 	}
 
