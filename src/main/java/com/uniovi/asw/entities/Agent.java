@@ -8,7 +8,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Agent {
-	
+
 	@Id
 	@GeneratedValue
 	private String idautogenerado;
@@ -37,10 +37,10 @@ public class Agent {
 		this(name, email, password, id, kind);
 		this.location = location;
 	}
-	
-	public Agent(String name,  String password, String location) {
-		this.name=name;
-		this.password=password;
+
+	public Agent(String name, String password, String location) {
+		this.name = name;
+		this.password = password;
 		this.location = location;
 	}
 
