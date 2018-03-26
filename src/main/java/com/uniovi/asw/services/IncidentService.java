@@ -29,7 +29,6 @@ public class IncidentService {
 	public List<Incident> getIncidents() {
 		return incidentRepository.findAll();
 	}
-<<<<<<< HEAD
 	
 	public Page<Incident> getPageIncidents(Pageable pageable)
 	{
@@ -38,10 +37,6 @@ public class IncidentService {
 	
 	public List<Incident> getByTopic(String topic)
 	{
-=======
-
-	public List<Incident> getByTopic(String topic) {
->>>>>>> Pedro
 		return incidentRepository.findByTopic(topic);
 	}
 

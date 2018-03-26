@@ -82,14 +82,12 @@
 							<td th:text="${incident.operator.username}">Incident topic</td>
 							<td th:text="${incident.status}">Incident status</td>
 							<td>
-								<div class="btn-group" role="group" aria-label="Options">
-									<button type="button" class="btn btn-secondary">Details</button>
-									<button type="button" class="btn btn-secondary">Change
-										Status</button>
-									<button type="button" class="btn btn-secondary">Option
-										3</button>
-								</div>
-							</td>
+							<div class="btn-group" role="group" aria-label="Options">
+								<a class="btn btn-secondary" role="button" th:href="${'/incident/details/' + incident.id}">Details</a>
+								<a class="btn btn-secondary" role="button" href="#">Change Status</a>
+								<a class="btn btn-secondary" role="button" href="#">Option 3</a>
+							</div>
+						</td>
 						</tr>
 					</tbody>
 				</table>
@@ -244,55 +242,6 @@
 			</div>
 		</div>
 	</div>
-<<<<<<< HEAD
-
-=======
-	<div class="card m-5">
-		<div class="card-header">
-			<h3>Last incidents received</h3>
-		</div>
-		<div class="card-body">
-			<table class="table table-hover table-responsive">
-				<thead class="thead-light">
-					<tr>
-						<th scope="col">ID</th>
-						<th scope="col">Assigned agent</th>
-						<th scope="col">Name</th>
-						<th scope="col">Location</th>
-						<th scope="col">Date</th>
-						<th scope="col">Topic</th>
-						<th scope="col">Operator</th>
-						<th scope="col">Status</th>
-						<th scope="col">Options</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="incident : ${incidentsList}">
-						<th scope="row" th:text="${incident.id}">ID</th>
-						<td th:text="${incident.agent.userName}">Agent name</td>
-						<td th:text="${incident.incidentName}">Incident name</td>
-						<td><a
-							th:text="${incident.location.lat} + ', ' + ${incident.location.lng}"
-							th:href="'http://maps.google.com/maps?q=' + 
-					    			${incident.location.lat} + ',' + ${incident.location.lng}">Incident
-								location</a></td>
-						<td th:text="${incident.date}">Incident date</td>
-						<td th:text="${incident.topic}">Incident topic</td>
-						<td th:text="${incident.operator.username}">Incident topic</td>
-						<td th:text="${incident.status}">Incident status</td>
-						<td>
-							<div class="btn-group" role="group" aria-label="Options">
-								<a class="btn btn-secondary" role="button" th:href="${'/incident/details/' + incident.id}">Details</a>
-								<a class="btn btn-secondary" role="button" href="#">Change Status</a>
-								<a class="btn btn-secondary" role="button" href="#">Option 3</a>
-							</div>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
->>>>>>> Pedro
 	<div class="card m-5">
 		<div class="card">
 			<div class="card-header">Incident geolocalization</div>
