@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<title>InciDashboard i1a</title>
+	
+	<!-- Bootstrap core CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	
+	<!-- Using some scripts -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	
+	<!-- Custom styles for this template -->
+	<link href="/css/custom-dashboard.css" rel="stylesheet">
+</head>
+
+<body>
+	<main role="main" class="container">
+	<div class="card mt-5">
+		<h2 class="card-header" th:text="${'Change status of incident ' + incident.incidentName}">Change status of incident i</h2>
+		<div class="card-body">
+			<h5 class="card-title" th:text="${'Current status: ' + incident.status}">Current status of Incident i is: STATUS</h5>
+			<form method="post" th:action="${'/incident/edit/' + incident.id}" th:object="${incident}">
+				<div class="form-group">
+					<label for="status">Please, select the new incident status:</label> 
+					<select id="status" name="incStatus" class="custom-select">
+						<option selected value="OPEN">Open</option>
+						<option value="IN_PROCESS">In process</option>
+						<option value="CLOSED">Closed</option>
+						<option value="CANCELLED">Cancelled</option>
+					</select>
+					<small id="statusWarning" class="form-text text-muted">By changing incident status you accept all the consequences derived from it.</small>
+				</div>
+				<button type="submit" class="btn btn-primary">Submit changes</button>
+			</form>
+		</div>
+	</div>
+	</main>
+</body>
+</html>

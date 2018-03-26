@@ -154,5 +154,10 @@ public class Incident {
 	public void setLocation(LatLng location) {
 		this.location = location;
 	}
+	
+	public boolean isAssignedTo(String username)
+	{
+		return (username.equals(operator.getUsername())) ? true : false;
+	}
 
 }

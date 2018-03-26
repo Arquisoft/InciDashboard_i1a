@@ -24,7 +24,7 @@
 	<div class="card mt-5">
 		<img class="card-img-top"
 			th:src="'https://maps.googleapis.com/maps/api/staticmap?center=' + ${incident.location.lat} + ',' + ${incident.location.lng} +
-			'&zoom=13&scale=1&size=800x300&maptype=hybrid&key=AIzaSyCuTSKiLsy3L3BL4yWfmaW1Ovs-qgRc6yY&format=png&visual_refresh=true
+			'&zoom=8&scale=1&size=800x300&maptype=hybrid&key=AIzaSyCuTSKiLsy3L3BL4yWfmaW1Ovs-qgRc6yY&format=png&visual_refresh=true
 			&markers=size:large%7Ccolor:0x0080ff%7Clabel:%7C' + ${incident.location.lat} + ',' + ${incident.location.lng}"
 			alt="Incident map">
 		<div class="card-body">

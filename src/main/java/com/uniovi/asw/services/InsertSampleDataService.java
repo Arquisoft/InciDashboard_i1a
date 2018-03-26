@@ -63,7 +63,7 @@ public class InsertSampleDataService {
 
 		// Adding some Incidents randomly
 		// 50 incidents, 5 tags, 5 aditional props. using existing agents
-		generateRandomIncidents(50, 5, 5, agents);
+		generateRandomIncidents(100, 5, 5, agents);
 	}
 
 	private void generateRandomIncidents(int numINcidents, int numTags, int numAddProp, List<Agent> agents) {

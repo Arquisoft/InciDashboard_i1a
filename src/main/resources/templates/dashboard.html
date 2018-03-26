@@ -85,10 +85,9 @@
 							<td>
 								<div class="btn-group" role="group" aria-label="Options">
 									<a class="btn btn-secondary" role="button"
-										th:href="${'/incident/details/' + incident.id}">Details</a> <a
-										class="btn btn-secondary" role="button" href="#">Change
-										Status</a> <a class="btn btn-secondary" role="button" href="#">Option
-										3</a>
+										th:href="${'/incident/details/' + incident.id}">Details</a>
+									<a class="btn btn-secondary" role="button" 
+										th:href="${'/incident/edit/' + incident.id}" th:if="${incident.isAssignedTo(loggedUser)}">Change status</a>
 								</div>
 							</td>
 						</tr>
@@ -276,6 +275,9 @@
 			// The map() method here has nothing to do with the Google Maps API.
 			var markers = locations.map(function(location, i) {
 				contentString = '<h1>' + nombres[i] + '</h1>' + '<p>' + descripciones[i] + '</p>';
+				var infowindow = new google.maps.InfoWindow({
+					content : contentString
+				});
 				var marker = new google.maps.Marker({
 					position : location,
 					label : labels[i % labels.length]
@@ -284,10 +286,6 @@
 					infowindow.open(map, marker);
 				});
 				return marker;
-			});
-			
-			var infowindow = new google.maps.InfoWindow({
-				content : contentString
 			});
 
 			// Add a marker clusterer to manage the markers.
