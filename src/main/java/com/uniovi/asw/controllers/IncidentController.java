@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.uniovi.asw.entities.Incident;
 import com.uniovi.asw.services.IncidentService;
 
 @Controller
@@ -16,6 +17,8 @@ public class IncidentController {
 	
 	@RequestMapping("/incident/details/{id}")
 	public String getDetails(Model model, @PathVariable Long id) {
+		Incident incident = incidentService.getIncidentById(id);
+		model.addAttribute("incident", incident);
 		return "incident/details";
 	}
 

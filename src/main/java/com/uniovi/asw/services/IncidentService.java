@@ -13,10 +13,10 @@ import com.uniovi.asw.repositories.IncidentRepository;
 
 @Service
 public class IncidentService {
-	
+
 	@Autowired
 	private IncidentRepository incidentRepository;
-	
+
 	@Autowired
 	private TopicService topicsService;
 
@@ -27,10 +27,13 @@ public class IncidentService {
 	public List<Incident> getIncidents() {
 		return incidentRepository.findAll();
 	}
-	
-	public List<Incident> getByTopic(String topic)
-	{
+
+	public List<Incident> getByTopic(String topic) {
 		return incidentRepository.findByTopic(topic);
+	}
+
+	public Incident getIncidentById(Long id) {
+		return incidentRepository.findById(id);
 	}
 
 	public Map<String, Integer> getCountByTopic(List<Incident> incidentsList) {
@@ -42,15 +45,14 @@ public class IncidentService {
 		count.put(topics[3], 0);
 		count.put(topics[4], 0);
 		count.put(topics[5], 0);
-		for (Incident i : incidentsList)
-		{
+		for (Incident i : incidentsList) {
 			int countUntilNow = count.get(i.getTopic());
 			countUntilNow++;
 			count.put(i.getTopic(), countUntilNow);
 		}
 		return count;
 	}
-	
+
 	public Map<String, Integer> getCountByStatus(List<Incident> incidentsList) {
 		Map<String, Integer> count = new HashMap<String, Integer>();
 		IncidentStatus[] status = IncidentStatus.values();
@@ -58,8 +60,7 @@ public class IncidentService {
 		count.put(status[1].name(), 0);
 		count.put(status[2].name(), 0);
 		count.put(status[3].name(), 0);
-		for (Incident i : incidentsList)
-		{
+		for (Incident i : incidentsList) {
 			int countUntilNow = count.get(i.getStatus().name());
 			countUntilNow++;
 			count.put(i.getStatus().name(), countUntilNow);

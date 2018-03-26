@@ -203,9 +203,9 @@
 						<td th:text="${incident.status}">Incident status</td>
 						<td>
 							<div class="btn-group" role="group" aria-label="Options">
-								<button type="button" class="btn btn-secondary">Details</button>
-								<button type="button" class="btn btn-secondary">Change Status</button>
-								<button type="button" class="btn btn-secondary">Option 3</button>
+								<a class="btn btn-secondary" role="button" th:href="${'/incident/details/' + incident.id}">Details</a>
+								<a class="btn btn-secondary" role="button" href="#">Change Status</a>
+								<a class="btn btn-secondary" role="button" href="#">Option 3</a>
 							</div>
 						</td>
 					</tr>
