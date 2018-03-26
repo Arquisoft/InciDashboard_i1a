@@ -19,6 +19,7 @@ import com.uniovi.asw.entities.Agent;
 import com.uniovi.asw.entities.Incident;
 import com.uniovi.asw.entities.Incident.IncidentStatus;
 import com.uniovi.asw.entities.Operator;
+import com.uniovi.asw.util.LatLng;
 
 @Service
 public class InsertSampleDataService {
@@ -70,22 +71,25 @@ public class InsertSampleDataService {
 			Agent agent = pickRandomAgent(agents);
 			String incidentName = RandomStringUtils.randomAlphabetic(9);
 			String incidentDescription = RandomStringUtils.randomAlphabetic(20);
-			double Y = 36 + Math.random() * (43 - 36);
-			double X = -9 + Math.random() * (3 + 9);
-			String location = String.valueOf(Y) + "," + String.valueOf(X);
+			double lat = 36 + Math.random() * (43 - 36);
+			double lng = -9 + Math.random() * (3 + 9);
+			LatLng location = new LatLng(lat, lng);
 			Date date = new Date();
 			ArrayList<String> tags = new ArrayList<String>();
 			tags = generateRandomTags(numTags);
 			Map<String, String> additionalProperties = generateRandomAddProperties(numAddProp);
 			String[] topics = topicsService.getTopics();
 			String topic = topics[r.nextInt(6)];
+			List<Operator> operators = operatorService.getOperators();
+			Random r = new Random();
+			Operator operatorAssigned = operators.get(r.nextInt(operators.size()));
 
 			List<IncidentStatus> values = Collections.unmodifiableList(Arrays.asList(IncidentStatus.values()));
 			int size = values.size();
 			IncidentStatus status = values.get(r.nextInt(size));
 
 			Incident incident = new Incident(agent, incidentName, incidentDescription, location, date, tags,
-					additionalProperties, topic, status);
+					additionalProperties, topic, status, operatorAssigned);
 			incidentService.saveIncident(incident);
 		}
 	}

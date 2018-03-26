@@ -6,7 +6,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.*;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.uniovi.asw.util.LatLng;
 
 @Entity
 public class Incident {
@@ -21,8 +30,11 @@ public class Incident {
 
 	private String incidentName;
 	private String description;
-	private String location;
+	private LatLng location;
 	private Date date;
+	
+	@ManyToOne
+	private Operator operator;
 
 	@ElementCollection(targetClass=String.class)
 	private List<String> tags = new ArrayList<String>();
@@ -39,8 +51,9 @@ public class Incident {
 		OPEN, IN_PROCESS, CLOSED, CANCELLED
 	};
 
-	public Incident(Agent agent, String incidentName, String description, String location, Date date,
-			ArrayList<String> tags, Map<String, String> aditionalProperties, String topic, IncidentStatus status) {
+	public Incident(Agent agent, String incidentName, String description, LatLng location, Date date,
+			ArrayList<String> tags, Map<String, String> aditionalProperties, String topic, IncidentStatus status, 
+			Operator operator) {
 		this.agent = agent;
 		this.incidentName = incidentName;
 		this.description = description;
@@ -50,6 +63,8 @@ public class Incident {
 		this.aditionalProperties = aditionalProperties;
 		this.topic = topic;
 		this.status = status;
+		this.operator = operator;
+		operator.getIncidents().add(this);
 	}
 
 	public Incident() {
@@ -78,14 +93,6 @@ public class Incident {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public String getLocation() {
-		return location;
-	}
-
-	public void setLocation(String location) {
-		this.location = location;
 	}
 
 	public List<String> getTags() {
@@ -130,6 +137,22 @@ public class Incident {
 	
 	public Long getId() {
 		return id;
+	}
+
+	public Operator getOperator() {
+		return operator;
+	}
+
+	public void setOperator(Operator operator) {
+		this.operator = operator;
+	}
+
+	public LatLng getLocation() {
+		return location;
+	}
+
+	public void setLocation(LatLng location) {
+		this.location = location;
 	}
 
 }
