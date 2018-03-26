@@ -79,13 +79,16 @@ public class InsertSampleDataService {
 			Map<String, String> additionalProperties = generateRandomAddProperties(numAddProp);
 			String[] topics = topicsService.getTopics();
 			String topic = topics[r.nextInt(6)];
+			List<Operator> operators = operatorService.getOperators();
+			Random r = new Random();
+			Operator operatorAssigned = operators.get(r.nextInt(operators.size()));
 
 			List<IncidentStatus> values = Collections.unmodifiableList(Arrays.asList(IncidentStatus.values()));
 			int size = values.size();
 			IncidentStatus status = values.get(r.nextInt(size));
 
 			Incident incident = new Incident(agent, incidentName, incidentDescription, location, date, tags,
-					additionalProperties, topic, status);
+					additionalProperties, topic, status, operatorAssigned);
 			incidentService.saveIncident(incident);
 		}
 	}
