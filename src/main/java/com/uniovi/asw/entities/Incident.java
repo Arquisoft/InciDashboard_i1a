@@ -31,7 +31,9 @@ public class Incident {
 	private String incidentName;
 	private String description;
 	private LatLng location;
+	private String locationString;
 	private Date date;
+	private String aditionalPropertiesString;
 	
 	@ManyToOne
 	private Operator operator;
@@ -158,6 +160,22 @@ public class Incident {
 	public boolean isAssignedTo(String username)
 	{
 		return (username.equals(operator.getUsername())) ? true : false;
+	}
+
+	public String getLocationString() {
+		return locationString;
+	}
+
+	public void setLocationString(String locationString) {
+		this.locationString = locationString;
+	}
+
+	public String getAditionalPropertiesString() {
+		return aditionalPropertiesString;
+	}
+
+	public void setAditionalPropertiesString(String aditionalPropertiesString) {
+		this.aditionalPropertiesString = aditionalPropertiesString;
 	}
 
 }
