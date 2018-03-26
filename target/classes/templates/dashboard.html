@@ -28,7 +28,8 @@
 
 <script
 	src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
-    </script>
+	
+</script>
 
 
 <script src="/script/Chart.js"></script>
@@ -82,12 +83,14 @@
 							<td th:text="${incident.operator.username}">Incident topic</td>
 							<td th:text="${incident.status}">Incident status</td>
 							<td>
-							<div class="btn-group" role="group" aria-label="Options">
-								<a class="btn btn-secondary" role="button" th:href="${'/incident/details/' + incident.id}">Details</a>
-								<a class="btn btn-secondary" role="button" href="#">Change Status</a>
-								<a class="btn btn-secondary" role="button" href="#">Option 3</a>
-							</div>
-						</td>
+								<div class="btn-group" role="group" aria-label="Options">
+									<a class="btn btn-secondary" role="button"
+										th:href="${'/incident/details/' + incident.id}">Details</a> <a
+										class="btn btn-secondary" role="button" href="#">Change
+										Status</a> <a class="btn btn-secondary" role="button" href="#">Option
+										3</a>
+								</div>
+							</td>
 						</tr>
 					</tbody>
 				</table>
@@ -131,58 +134,60 @@
 						<canvas id="barChart" width="150" height="150"></canvas>
 					</div>
 					<script type="text/javascript" th:inline="javascript">
-					/*<![CDATA[*/
-					var ctx = document.getElementById("barChart").getContext(
-							'2d');
-					var myChart = new Chart(
-							ctx,
-							{
-								type : 'bar',
-								data : {
-									labels : [ "Accident", "Fire", "Alterc",
-											"Medical", "Meteo", "Other" ],
-									datasets : [ {
-										label: 'No. of incidents',
-										data : [
-												"[[${countIncidents.get('ACCIDENT')}]]",
-												"[[${countIncidents.get('FIRE')}]]",
-												"[[${countIncidents.get('ALTERCATION')}]]",
-												"[[${countIncidents.get('MEDICAL_EMERGENCY')}]]",
-												"[[${countIncidents.get('METEOROLOGICAL_PHENOMENON')}]]",
-												"[[${countIncidents.get('OTHER')}]]" ],
-										backgroundColor : [
-												'rgba(255, 99, 132, 0.2)',
-												'rgba(54, 162, 235, 0.2)',
-												'rgba(255, 206, 86, 0.2)',
-												'rgba(75, 192, 192, 0.2)',
-												'rgba(153, 102, 255, 0.2)',
-												'rgba(255, 159, 64, 0.2)' ],
-										borderColor : [ 'rgba(255,99,132,1)',
-												'rgba(54, 162, 235, 1)',
-												'rgba(255, 206, 86, 1)',
-												'rgba(75, 192, 192, 1)',
-												'rgba(153, 102, 255, 1)',
-												'rgba(255, 159, 64, 1)' ],
-										borderWidth : 1
-									} ]
-								},
-								options: {
-									responsive: true,
-									legend: {
-										position: 'top',
-									},
-									scales : {
-										yAxes : [ {
-											ticks : {
-												fixedStepSize: 2,
-												beginAtZero : true
-											}
+						/*<![CDATA[*/
+						var ctx = document.getElementById("barChart")
+								.getContext('2d');
+						var myChart = new Chart(
+								ctx,
+								{
+									type : 'bar',
+									data : {
+										labels : [ "Accident", "Fire",
+												"Alterc", "Medical", "Meteo",
+												"Other" ],
+										datasets : [ {
+											label : 'No. of incidents',
+											data : [
+													"[[${countIncidents.get('ACCIDENT')}]]",
+													"[[${countIncidents.get('FIRE')}]]",
+													"[[${countIncidents.get('ALTERCATION')}]]",
+													"[[${countIncidents.get('MEDICAL_EMERGENCY')}]]",
+													"[[${countIncidents.get('METEOROLOGICAL_PHENOMENON')}]]",
+													"[[${countIncidents.get('OTHER')}]]" ],
+											backgroundColor : [
+													'rgba(255, 99, 132, 0.2)',
+													'rgba(54, 162, 235, 0.2)',
+													'rgba(255, 206, 86, 0.2)',
+													'rgba(75, 192, 192, 0.2)',
+													'rgba(153, 102, 255, 0.2)',
+													'rgba(255, 159, 64, 0.2)' ],
+											borderColor : [
+													'rgba(255,99,132,1)',
+													'rgba(54, 162, 235, 1)',
+													'rgba(255, 206, 86, 1)',
+													'rgba(75, 192, 192, 1)',
+													'rgba(153, 102, 255, 1)',
+													'rgba(255, 159, 64, 1)' ],
+											borderWidth : 1
 										} ]
+									},
+									options : {
+										responsive : true,
+										legend : {
+											position : 'top',
+										},
+										scales : {
+											yAxes : [ {
+												ticks : {
+													fixedStepSize : 2,
+													beginAtZero : true
+												}
+											} ]
+										}
 									}
-								}
-							});
-					/*]]>*/
-				</script>
+								});
+						/*]]>*/
+					</script>
 				</div>
 			</div>
 		</div>
@@ -196,48 +201,42 @@
 						<canvas id="doughChart"></canvas>
 					</div>
 					<script type="text/javascript" th:inline="javascript">
-				var config = {
-					type: 'doughnut',
-					data: {
-						datasets: [{
-							data: [
-								"[[${countStatus.get('OPEN')}]]",
-								"[[${countStatus.get('IN_PROCESS')}]]",
-								"[[${countStatus.get('CLOSED')}]]",
-								"[[${countStatus.get('CANCELLED')}]]",
-							],
-							backgroundColor: [
-								'rgb(255, 99, 132)',
-								'rgb(255, 205, 86)',
-								'rgb(75, 192, 192)',
-								'rgb(54, 162, 235)',
-							],
-							label: 'Status dataset'
-						}],
-						labels: [
-							'Open',
-							'In Process',
-							'Closed',
-							'Cancelled'
-						]
-					},
-					options: {
-						responsive: true,
-						legend: {
-							position: 'top',
-						},
-						animation: {
-							animateScale: true,
-							animateRotate: true
-						}
-					}
-				};
+						var config = {
+							type : 'doughnut',
+							data : {
+								datasets : [ {
+									data : [
+											"[[${countStatus.get('OPEN')}]]",
+											"[[${countStatus.get('IN_PROCESS')}]]",
+											"[[${countStatus.get('CLOSED')}]]",
+											"[[${countStatus.get('CANCELLED')}]]", ],
+									backgroundColor : [ 'rgb(255, 99, 132)',
+											'rgb(255, 205, 86)',
+											'rgb(75, 192, 192)',
+											'rgb(54, 162, 235)', ],
+									label : 'Status dataset'
+								} ],
+								labels : [ 'Open', 'In Process', 'Closed',
+										'Cancelled' ]
+							},
+							options : {
+								responsive : true,
+								legend : {
+									position : 'top',
+								},
+								animation : {
+									animateScale : true,
+									animateRotate : true
+								}
+							}
+						};
 
-				window.onload = function() {
-					var ctx = document.getElementById('doughChart').getContext('2d');
-					window.myDoughnut = new Chart(ctx, config);
-				};
-				</script>
+						window.onload = function() {
+							var ctx = document.getElementById('doughChart')
+									.getContext('2d');
+							window.myDoughnut = new Chart(ctx, config);
+						};
+					</script>
 				</div>
 			</div>
 		</div>
@@ -251,68 +250,59 @@
 		</div>
 	</div>
 	<script th:inline=javascript>
-    /*<![CDATA[*/
-    	
-      function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 6,
-          center: {lat: 40.1888159, lng: -5.4138884}
-        });
+		/*<![CDATA[*/
+		var locations = [[${localizaciones}]];
+		var nombres = [[${nombres}]];
+		var descripciones = [[${descriptions}]];
+		function initMap() {
+			var map = new google.maps.Map(document.getElementById('map'), {
+				zoom : 6,
+				center : {
+					lat : 40.1888159,
+					lng : -5.4138884
+				}
+			});
 
-        // Create an array of alphabetical characters used to label the markers.
-        var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+			// Create an array of alphabetical characters used to label the markers.
+			var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-        var contentString = '<div id="content">'+
-        '<div id="siteNotice">'+
-        '</div>'+
-        '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
-        '<div id="bodyContent">'+
-        '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
-        'sandstone rock formation in the southern part of the '+
-        'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
-        'south west of the nearest large town, Alice Springs; 450&#160;km '+
-        '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
-        'features of the Uluru - Kata Tjuta National Park. Uluru is '+
-        'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
-        'Aboriginal people of the area. It has many springs, waterholes, '+
-        'rock caves and ancient paintings. Uluru is listed as a World '+
-        'Heritage Site.</p>'+
-        '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
-        'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
-        '(last visited June 22, 2009).</p>'+
-        '</div>'+
-        '</div>';
+			var contentString = '';
 
-	    var infowindow = new google.maps.InfoWindow({
-	      content: contentString
-	    });
-        
-        // Add some markers to the map.
-        // Note: The code uses the JavaScript Array.prototype.map() method to
-        // create an array of markers based on a given "locations" array.
-        // The map() method here has nothing to do with the Google Maps API.
-        var markers = locations.map(function(location, i) {
-        	
-          var marker =  new google.maps.Marker({
-            position: location,
-            label: labels[i % labels.length]
-          });
-          marker.addListener('click', function() {
-            infowindow.open(map, marker);
-          });
-          return marker;
-        });
+			
 
-        // Add a marker clusterer to manage the markers.
-        var markerCluster = new MarkerClusterer(map, markers,
-            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-      }
-      var locations = [[${localizaciones}]];
-      
-      /*]]>*/
-    </script>
+			// Add some markers to the map.
+			// Note: The code uses the JavaScript Array.prototype.map() method to
+			// create an array of markers based on a given "locations" array.
+			// The map() method here has nothing to do with the Google Maps API.
+			var markers = locations.map(function(location, i) {
+				contentString = '<h1>' + nombres[i] + '</h1>' + '<p>' + descripciones[i] + '</p>';
+				var marker = new google.maps.Marker({
+					position : location,
+					label : labels[i % labels.length]
+				});
+				marker.addListener('click', function() {
+					infowindow.open(map, marker);
+				});
+				return marker;
+			});
+			
+			var infowindow = new google.maps.InfoWindow({
+				content : contentString
+			});
+
+			// Add a marker clusterer to manage the markers.
+			var markerCluster = new MarkerClusterer(
+					map,
+					markers,
+					{
+						imagePath : 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
+					});
+		};
+		/*]]>*/
+	</script>
 	<script async defer
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwARKHHxXQPny7hJNwu1xxJKoUP-l6O7Q&callback=initMap">
-    </script>
+		
+	</script>
 </body>
 </html>
