@@ -3,6 +3,7 @@ package com.uniovi.asw.controllers;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -36,14 +37,18 @@ public class DashboardController {
 		Page<Incident> incidents = new PageImpl<Incident>(new LinkedList<Incident>());
 		incidents = incidentService.getPageIncidents(pageable);
 		List<Incident> incidentsList = incidentService.getIncidents();
-		List<Incident> incidentsPage = incidents.getContent();
+		
+		List<String> nombres = incidentsList.stream().map(i -> i.getIncidentName()).collect(Collectors.toList());
+		List<String> descriptions = incidentsList.stream().map(i -> i.getDescription()).collect(Collectors.toList());
 		
 		Map<String, Integer> countIncidents = incidentService.getCountByTopic(incidentsList);
 		Map<String, Integer> countStatus = incidentService.getCountByStatus(incidentsList);
 		
 		List<LatLng> localizaciones = cargarIncidentesEnMapaService.localizaciones();
 		
-		model.addAttribute("incidentsList", incidentsPage);
+		model.addAttribute("incidentsList", incidentsList);
+		model.addAttribute("nombres", nombres);
+		model.addAttribute("descriptions", descriptions);
 		model.addAttribute("loggedUser", loggedUser);
 		model.addAttribute("page", incidents);
 		model.addAttribute("countIncidents", countIncidents);
