@@ -48,6 +48,80 @@
 		to the incidents dashboard. Logged as: someone</p>
 	</main>
 	<div class="row ml-4 mr-4 mt-4">
+		<div class="card m-5">
+			<div class="card-header">
+				<h3>Last incidents received</h3>
+			</div>
+			<div class="card-body">
+				<table class="table table-hover table-responsive">
+					<thead class="thead-light">
+						<tr>
+							<th scope="col">ID</th>
+							<th scope="col">Assigned agent</th>
+							<th scope="col">Name</th>
+							<th scope="col">Location</th>
+							<th scope="col">Date</th>
+							<th scope="col">Topic</th>
+							<th scope="col">Operator</th>
+							<th scope="col">Status</th>
+							<th scope="col">Options</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="incident : ${incidentsList}">
+							<th scope="row" th:text="${incident.id}">ID</th>
+							<td th:text="${incident.agent.userName}">Agent name</td>
+							<td th:text="${incident.incidentName}">Incident name</td>
+							<td><a
+								th:text="${incident.location.lat} + ', ' + ${incident.location.lng}"
+								th:href="'http://maps.google.com/maps?q=' + 
+					    			${incident.location.lat} + ',' + ${incident.location.lng}">Incident
+									location</a></td>
+							<td th:text="${incident.date}">Incident date</td>
+							<td th:text="${incident.topic}">Incident topic</td>
+							<td th:text="${incident.operator.username}">Incident topic</td>
+							<td th:text="${incident.status}">Incident status</td>
+							<td>
+								<div class="btn-group" role="group" aria-label="Options">
+									<button type="button" class="btn btn-secondary">Details</button>
+									<button type="button" class="btn btn-secondary">Change
+										Status</button>
+									<button type="button" class="btn btn-secondary">Option
+										3</button>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="text-center">
+					<ul class="pagination pagination-centered">
+						<!-- Primera -->
+						<li class="page-item"><a class="page-link"
+							th:href="@{'?page=0'}">Primera</a></li>
+
+						<!-- Anterior (si la hay ) -->
+						<li class="page-item" th:if='${page.getNumber() - 1 >= 0}'><a
+							class="page-link" th:href="@{'?page='+${page.getNumber()-1} }"
+							th:text="${page.getNumber()}"></a></li>
+
+						<!-- Actual -->
+						<li class="page-item active"><a class="page-link"
+							th:href="@{'?page='+${page.getNumber()} }"
+							th:text="${page.getNumber() + 1}"></a></li>
+
+						<!-- Siguiente (si la hay)  -->
+						<li class="page-item"
+							th:if='${page.getNumber() + 1 <= page.getTotalPages() - 1}'><a
+							class="page-link" th:href="@{'?page='+${page.getNumber()+1} }"
+							th:text="${page.getNumber()+2}"></a></li>
+
+						<!-- Última -->
+						<li class="page-item"><a class="page-link"
+							th:href="@{'?page='+${page.getTotalPages()-1}}"> Última</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
 		<div class="col-sm-6">
 			<div class="card">
 				<div class="card-header">
@@ -55,10 +129,10 @@
 				</div>
 				<div class="card-body">
 
-				<div class="container">
-					<canvas id="barChart" width="150" height="150"></canvas>
-				</div>
-				<script type="text/javascript" th:inline="javascript">
+					<div class="container">
+						<canvas id="barChart" width="150" height="150"></canvas>
+					</div>
+					<script type="text/javascript" th:inline="javascript">
 					/*<![CDATA[*/
 					var ctx = document.getElementById("barChart").getContext(
 							'2d');
@@ -116,12 +190,14 @@
 		</div>
 		<div class="col-sm-6">
 			<div class="card">
-				<div class="card-header"><h3>Status chart</h3></div>
-				<div class="card-body">
-				<div class="container">
-					<canvas id="doughChart"></canvas>
+				<div class="card-header">
+					<h3>Status chart</h3>
 				</div>
-				<script type="text/javascript" th:inline="javascript">
+				<div class="card-body">
+					<div class="container">
+						<canvas id="doughChart"></canvas>
+					</div>
+					<script type="text/javascript" th:inline="javascript">
 				var config = {
 					type: 'doughnut',
 					data: {
@@ -168,51 +244,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="card m-5">
-		<div class="card-header">
-			<h3>Last incidents received</h3>
-		</div>
-		<div class="card-body">
-			<table class="table table-hover table-responsive">
-				<thead class="thead-light">
-					<tr>
-						<th scope="col">ID</th>
-						<th scope="col">Assigned agent</th>
-						<th scope="col">Name</th>
-						<th scope="col">Location</th>
-						<th scope="col">Date</th>
-						<th scope="col">Topic</th>
-						<th scope="col">Operator</th>
-						<th scope="col">Status</th>
-						<th scope="col">Options</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="incident : ${incidentsList}">
-						<th scope="row" th:text="${incident.id}">ID</th>
-						<td th:text="${incident.agent.userName}">Agent name</td>
-						<td th:text="${incident.incidentName}">Incident name</td>
-						<td><a
-							th:text="${incident.location.lat} + ', ' + ${incident.location.lng}"
-							th:href="'http://maps.google.com/maps?q=' + 
-					    			${incident.location.lat} + ',' + ${incident.location.lng}">Incident
-								location</a></td>
-						<td th:text="${incident.date}">Incident date</td>
-						<td th:text="${incident.topic}">Incident topic</td>
-						<td th:text="${incident.operator.username}">Incident topic</td>
-						<td th:text="${incident.status}">Incident status</td>
-						<td>
-							<div class="btn-group" role="group" aria-label="Options">
-								<button type="button" class="btn btn-secondary">Details</button>
-								<button type="button" class="btn btn-secondary">Change Status</button>
-								<button type="button" class="btn btn-secondary">Option 3</button>
-							</div>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
+
 	<div class="card m-5">
 		<div class="card">
 			<div class="card-header">Incident geolocalization</div>
