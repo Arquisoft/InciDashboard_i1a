@@ -71,7 +71,7 @@
 					<tbody>
 						<tr th:each="incident : ${incidentsList}">
 							<th scope="row" th:text="${incident.id}">ID</th>
-							<td th:text="${incident.agent.userName}">Agent name</td>
+							<td th:text="${incident.agent.name}">Agent name</td>
 							<td th:text="${incident.incidentName}">Incident name</td>
 							<td><a
 								th:text="${incident.location.lat} + ', ' + ${incident.location.lng}"
@@ -85,42 +85,41 @@
 							<td>
 								<div class="btn-group" role="group" aria-label="Options">
 									<a class="btn btn-secondary" role="button"
-										th:href="${'/incident/details/' + incident.id}">Details</a> <a
-										class="btn btn-secondary" role="button" href="#">Change
-										Status</a> <a class="btn btn-secondary" role="button" href="#">Option
-										3</a>
+										th:href="${'/incident/details/' + incident.id}">Details</a>
+									<a class="btn btn-secondary" role="button" 
+										th:href="${'/incident/edit/' + incident.id}" th:if="${incident.isAssignedTo(loggedUser)}">Change status</a>
 								</div>
 							</td>
 						</tr>
 					</tbody>
 				</table>
-				<div class="text-center">
+				<!-- <div class="text-center">
 					<ul class="pagination pagination-centered">
-						<!-- Primera -->
+						
 						<li class="page-item"><a class="page-link"
 							th:href="@{'?page=0'}">Primera</a></li>
 
-						<!-- Anterior (si la hay ) -->
+						
 						<li class="page-item" th:if='${page.getNumber() - 1 >= 0}'><a
 							class="page-link" th:href="@{'?page='+${page.getNumber()-1} }"
 							th:text="${page.getNumber()}"></a></li>
 
-						<!-- Actual -->
+						
 						<li class="page-item active"><a class="page-link"
 							th:href="@{'?page='+${page.getNumber()} }"
 							th:text="${page.getNumber() + 1}"></a></li>
 
-						<!-- Siguiente (si la hay)  -->
+						
 						<li class="page-item"
 							th:if='${page.getNumber() + 1 <= page.getTotalPages() - 1}'><a
 							class="page-link" th:href="@{'?page='+${page.getNumber()+1} }"
 							th:text="${page.getNumber()+2}"></a></li>
 
-						<!-- Última -->
+						
 						<li class="page-item"><a class="page-link"
 							th:href="@{'?page='+${page.getTotalPages()-1}}"> Última</a></li>
 					</ul>
-				</div>
+				</div>-->
 			</div>
 		</div>
 		<div class="col-sm-6">
@@ -276,6 +275,9 @@
 			// The map() method here has nothing to do with the Google Maps API.
 			var markers = locations.map(function(location, i) {
 				contentString = '<h1>' + nombres[i] + '</h1>' + '<p>' + descripciones[i] + '</p>';
+				var infowindow = new google.maps.InfoWindow({
+					content : contentString
+				});
 				var marker = new google.maps.Marker({
 					position : location,
 					label : labels[i % labels.length]
@@ -284,10 +286,6 @@
 					infowindow.open(map, marker);
 				});
 				return marker;
-			});
-			
-			var infowindow = new google.maps.InfoWindow({
-				content : contentString
 			});
 
 			// Add a marker clusterer to manage the markers.

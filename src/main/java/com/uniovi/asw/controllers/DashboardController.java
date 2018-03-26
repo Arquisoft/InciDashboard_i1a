@@ -47,11 +47,11 @@ public class DashboardController {
 		
 		List<LatLng> localizaciones = cargarIncidentesEnMapaService.localizaciones();
 		
-		model.addAttribute("incidentsList", incidentPage);
+		model.addAttribute("incidentsList", incidentsList);
 		model.addAttribute("nombres", nombres);
 		model.addAttribute("descriptions", descriptions);
 		model.addAttribute("loggedUser", loggedUser);
-		model.addAttribute("page", incidents);
+		//model.addAttribute("page", incidents);
 		model.addAttribute("countIncidents", countIncidents);
 		model.addAttribute("localizaciones", localizaciones);
 		model.addAttribute("countStatus", countStatus);

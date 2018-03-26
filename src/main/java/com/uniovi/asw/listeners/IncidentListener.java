@@ -11,9 +11,11 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 
 import com.uniovi.asw.entities.Incident;
+import com.uniovi.asw.repositories.IncidentRepository;
 
 
 /**
@@ -25,17 +27,27 @@ public class IncidentListener {
 	Properties props = new Properties();
 	List<Incident> incidents = new ArrayList<Incident>();
 	
+	@Autowired
+	private IncidentRepository incidentsRepository;
+	
 
 	private static final Logger logger = Logger.getLogger(IncidentListener.class);
 	
 	private void getData(String topic) {
-		props.put("value.deserializer", "com.knoldus.deserializer.IncidentDeserializer");
+		props.put("acks", "all");
+		 props.put("retries", 0);
+		 props.put("batch.size", 16384);
+		 props.put("linger.ms", 1);
+		 props.put("buffer.memory", 33554432);
+		 props.put("key.deserializer", "com.uniovi.asw.parser.IncidentDeserializer");
+		props.put("value.deserializer", "com.uniovi.asw.parser.IncidentDeserializer");
+		props.put("bootstrap.servers","localhost:9092");
 		try (KafkaConsumer<String, Incident> consumer = new KafkaConsumer<>(props)) {
 			consumer.subscribe(Collections.singletonList(topic));
 			while (true) {
 				ConsumerRecords<String, Incident> messages = consumer.poll(100);
 				for (ConsumerRecord<String, Incident> message : messages) {
-					incidents.add(message.value());
+					incidentsRepository.save(message.value());
 					System.out.println("Message received " + message.value().toString());
 				}
 			}
