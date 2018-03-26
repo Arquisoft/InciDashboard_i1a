@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uniovi.asw.entities.Incident;
+import com.uniovi.asw.entities.Incident.IncidentStatus;
 import com.uniovi.asw.repositories.IncidentRepository;
 
 @Service
@@ -46,6 +47,22 @@ public class IncidentService {
 			int countUntilNow = count.get(i.getTopic());
 			countUntilNow++;
 			count.put(i.getTopic(), countUntilNow);
+		}
+		return count;
+	}
+	
+	public Map<String, Integer> getCountByStatus(List<Incident> incidentsList) {
+		Map<String, Integer> count = new HashMap<String, Integer>();
+		IncidentStatus[] status = IncidentStatus.values();
+		count.put(status[0].name(), 0);
+		count.put(status[1].name(), 0);
+		count.put(status[2].name(), 0);
+		count.put(status[3].name(), 0);
+		for (Incident i : incidentsList)
+		{
+			int countUntilNow = count.get(i.getStatus().name());
+			countUntilNow++;
+			count.put(i.getStatus().name(), countUntilNow);
 		}
 		return count;
 	}
