@@ -129,7 +129,11 @@
 					    <th scope="row" th:text="${incident.id}">ID</th>
 					    <td th:text="${incident.agent.userName}">Agent name</td>
 					    <td th:text="${incident.incidentName}">Incident name</td>
-					    <td th:text="${incident.location}">Incident location</td>
+					    <td>
+					    		<a th:text="${incident.location.lat} + ', ' + ${incident.location.lng}" 
+					    		   th:href="'http://maps.google.com/maps?q=' + 
+					    			${incident.location.lat} + ',' + ${incident.location.lng}">Incident location</a>
+					    	</td>
 					    <td th:text="${incident.date}">Incident date</td>
 					    <td th:text="${incident.topic}">Incident topic</td>
 					    <td th:text="${incident.operator.username}">Incident topic</td>
