@@ -32,7 +32,7 @@
 			<p class="card-text" th:text="${incident.description}">Here goes the incident description.</p>
 		</div>
 		<ul class="list-group list-group-flush">
-			<li class="list-group-item" th:text="${'Incident submitted by: ' + incident.agent.userName}">Incident sent by Agent</li>
+			<li class="list-group-item" th:text="${'Incident submitted by: ' + incident.agent.name}">Incident sent by Agent</li>
 			<li class="list-group-item" th:text="${'Latitude: ' + incident.location.lat + ' ~ Longitude: ' + incident.location.lng}">Incident location</li>
 			<li class="list-group-item" th:text="${'Submitted on: ' + incident.date}">Incident date</li>
 			<li class="list-group-item">Tags:
