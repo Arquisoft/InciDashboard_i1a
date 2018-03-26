@@ -1,9 +1,8 @@
 package com.uniovi.asw;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -13,7 +12,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class InciDashboardI1aApplicationTests {
+public class SeleniumTests {
 	static String PathFirefox = "C:\\Users\\David\\Downloads\\Firefox46.win\\FirefoxPortable.exe";
 	static WebDriver driver = getDriver(PathFirefox);
 	static String URL = "http://localhost:8090";
@@ -70,7 +69,7 @@ public class InciDashboardI1aApplicationTests {
 		driver.findElement(By.id("loginButton")).click();
 		wait(driver, 1);
 		// Comprobamos que seguimos en el login
-		assertTrue(driver.getCurrentUrl() + " vs " + URL + "/login\n",
+		Assert.assertTrue(driver.getCurrentUrl() + " vs " + URL + "/login\n",
 				driver.getCurrentUrl().equalsIgnoreCase(URL + "/login?error=true"));
 	}
 
@@ -93,7 +92,7 @@ public class InciDashboardI1aApplicationTests {
 		driver.findElement(By.id("loginButton")).click();
 		wait(driver, 1);
 		// Comprobamos que entramos al dashboard
-		assertTrue(driver.getCurrentUrl() + " vs " + URL + "/dashboard\n",
+		Assert.assertTrue(driver.getCurrentUrl() + " vs " + URL + "/dashboard\n",
 				driver.getCurrentUrl().equalsIgnoreCase(URL + "/dashboard"));
 	}
 
@@ -104,8 +103,7 @@ public class InciDashboardI1aApplicationTests {
 		driver.navigate().to(URL + "/dashboard");
 		wait(driver, 1);
 		// Comprobamos que hemos sido redirigidos al login
-		assertTrue(driver.getCurrentUrl() + " vs " + URL + "/login\n",
+		Assert.assertTrue(driver.getCurrentUrl() + " vs " + URL + "/login\n",
 				driver.getCurrentUrl().equalsIgnoreCase(URL + "/login"));
 	}
-
 }
