@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.uniovi.asw.entities.Incident;
 import com.uniovi.asw.entities.Incident.IncidentStatus;
+import com.uniovi.asw.listeners.IncidentListener;
 import com.uniovi.asw.repositories.IncidentRepository;
 
 @Service
@@ -27,7 +28,10 @@ public class IncidentService {
 	}
 
 	public List<Incident> getIncidents() {
-		return incidentRepository.findAll();
+		IncidentListener lis = new IncidentListener();
+		List<Incident> incidents = lis.getIncidents();
+		incidents.addAll(incidentRepository.findAll());
+		return incidents;
 	}
 	
 	public Page<Incident> getPageIncidents(Pageable pageable)

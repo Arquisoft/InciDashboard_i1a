@@ -37,6 +37,7 @@ public class DashboardController {
 		Page<Incident> incidents = new PageImpl<Incident>(new LinkedList<Incident>());
 		incidents = incidentService.getPageIncidents(pageable);
 		List<Incident> incidentsList = incidentService.getIncidents();
+		List<Incident> incidentPage = incidents.getContent();
 		
 		List<String> nombres = incidentsList.stream().map(i -> i.getIncidentName()).collect(Collectors.toList());
 		List<String> descriptions = incidentsList.stream().map(i -> i.getDescription()).collect(Collectors.toList());
@@ -46,7 +47,7 @@ public class DashboardController {
 		
 		List<LatLng> localizaciones = cargarIncidentesEnMapaService.localizaciones();
 		
-		model.addAttribute("incidentsList", incidentsList);
+		model.addAttribute("incidentsList", incidentPage);
 		model.addAttribute("nombres", nombres);
 		model.addAttribute("descriptions", descriptions);
 		model.addAttribute("loggedUser", loggedUser);
