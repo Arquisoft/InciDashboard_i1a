@@ -27,9 +27,9 @@ public class EntityTests {
 	// Agents
 	@Test
 	public void PR01() {
-		Agent agent = new Agent("alejandro", "123456", "23.273425,-15.694777");
+		Agent agent = new Agent("500b", "alejandro", "123456", "23.273425,-15.694777");
 		Assert.assertFalse(agent.equals(null));
-		Agent agent2 = new Agent("alejandro", "123456", "23.273425,-15.694777");
+		Agent agent2 = new Agent("500b", "alejandro", "123456", "23.273425,-15.694777");
 		Assert.assertTrue(agent.equals(agent2));
 		agent.setId("125L");
 		Assert.assertEquals("125L", agent.getId());
@@ -68,7 +68,7 @@ public class EntityTests {
 		Assert.assertEquals("policeman", op.getPassword());
 		op.setId(100L);
 		op2.setId(101L);
-		Agent agent = new Agent("juan", "juan", "25,25");
+		Agent agent = new Agent("500a", "juan", "juan", "25,25");
 		Incident incident = createIncident(agent, op, "Fire", "A fire has been spotted", 25.0, 25.0);
 		Assert.assertEquals(op.getIncidents().size(), 1);
 		Assert.assertTrue(op.getIncidents().contains(incident));
@@ -80,7 +80,7 @@ public class EntityTests {
 	// Incidents
 	@Test
 	public void PR03() {
-		Agent agent = new Agent("pablo", "pablo", "25.0,25.0");
+		Agent agent = new Agent("700c","pablo", "pablo", "25.0,25.0");
 		Operator op = new Operator("fireman", "fireman");
 		Incident incident = createIncident(agent, op, "Fire", "Fire spotted in the woods", 25.0, 25.0);
 		Assert.assertEquals("Fire", incident.getIncidentName());
@@ -101,7 +101,7 @@ public class EntityTests {
 		Assert.assertTrue(incident.getAditionalProperties().containsKey("p2"));
 
 		Assert.assertEquals(incident.getAgent(), agent);
-		Agent carolina = new Agent("carolina", "contraseña", "30.0,30.0");
+		Agent carolina = new Agent("300z","carolina", "contraseña", "30.0,30.0");
 		incident.setAgent(carolina);
 		Assert.assertNotEquals(incident.getAgent(), agent);
 		Assert.assertEquals(incident.getAgent(), carolina);
