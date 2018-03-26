@@ -9,14 +9,15 @@ import javax.persistence.Id;
 @Entity
 public class Agent {
 
-	@Id
-	@GeneratedValue
+	
 	private String idautogenerado;
 
 	private String name;
 	private String email;
 	private String password;
 	private String location;
+	
+	@Id
 	private String id;
 	private int kind;
 
@@ -38,7 +39,8 @@ public class Agent {
 		this.location = location;
 	}
 
-	public Agent(String name, String password, String location) {
+	public Agent(String id, String name, String password, String location) {
+		this.id=id;
 		this.name = name;
 		this.password = password;
 		this.location = location;

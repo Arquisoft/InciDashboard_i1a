@@ -51,9 +51,9 @@ public class InsertSampleDataService {
 		// Adding some Agents
 		List<Agent> agents = new ArrayList<Agent>();
 
-		Agent agent1 = new Agent("pepe", "123456", "43.271934,-6.610977");
-		Agent agent2 = new Agent("maria", "123456", "43.348625,-5.127593");
-		Agent agent3 = new Agent("juan", "123456", "43.170862,-5.176625");
+		Agent agent1 = new Agent("1", "pepe", "123456", "43.271934,-6.610977");
+		Agent agent2 = new Agent("2","maria", "123456", "43.348625,-5.127593");
+		Agent agent3 = new Agent("3","juan", "123456", "43.170862,-5.176625");
 		agentService.saveAgent(agent1);
 		agents.add(agent1);
 		agentService.saveAgent(agent2);

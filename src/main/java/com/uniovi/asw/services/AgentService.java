@@ -22,8 +22,8 @@ public class AgentService {
 	}
 
 	public void saveAgentIfNotExist(Agent agent) {
-		Long id = Long.parseLong(agent.getId());
-		Agent a = agentRepository.findOne(id);
+		//Long id = Long.parseLong(agent.getId());
+		Agent a = agentRepository.findOne(agent.getId());
 		if (a == null)
 			agentRepository.save(agent);
 	}
