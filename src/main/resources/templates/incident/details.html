@@ -22,21 +22,31 @@
 <body>
 	<main role="main" class="container">
 	<div class="card mt-5">
-		<img class="card-img-top" src="..." alt="Incident map">
+		<img class="card-img-top"
+			th:src="'https://maps.googleapis.com/maps/api/staticmap?center=' + ${incident.location.lat} + ',' + ${incident.location.lng} +
+			'&zoom=13&scale=1&size=800x300&maptype=hybrid&key=AIzaSyCuTSKiLsy3L3BL4yWfmaW1Ovs-qgRc6yY&format=png&visual_refresh=true
+			&markers=size:large%7Ccolor:0x0080ff%7Clabel:%7C' + ${incident.location.lat} + ',' + ${incident.location.lng}"
+			alt="Incident map">
 		<div class="card-body">
-			<h5 class="card-title">Incident name</h5>
-			<p class="card-text">Here goes the incident description. Lorem
-				ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-				tempor incididunt ut labore et dolore magna aliqua.</p>
+			<h5 class="card-title" th:text="${incident.incidentName}">Incident name</h5>
+			<p class="card-text" th:text="${incident.description}">Here goes the incident description.</p>
 		</div>
 		<ul class="list-group list-group-flush">
-			<li class="list-group-item">Incident assigned to Agent</li>
-			<li class="list-group-item">Incident location</li>
-			<li class="list-group-item">Incident date</li>
-			<li class="list-group-item">Incident tags</li>
-			<li class="list-group-item">Incident properties</li>
-			<li class="list-group-item">Incident topic</li>
-			<li class="list-group-item">Incident status</li>
+			<li class="list-group-item" th:text="${'Incident submitted by: ' + incident.agent.userName}">Incident sent by Agent</li>
+			<li class="list-group-item" th:text="${'Latitude: ' + incident.location.lat + ' ~ Longitude: ' + incident.location.lng}">Incident location</li>
+			<li class="list-group-item" th:text="${'Submitted on: ' + incident.date}">Incident date</li>
+			<li class="list-group-item">Tags:
+				<ul class="list-inline" th:each="tag : ${incident.tags}">
+					<li class="list-inline-item" th:text="${tag}">Tag</li>
+				</ul>
+			</li>
+			<li class="list-group-item">Aditional properties:
+				<ul class="list-inline" th:each="prop : ${incident.aditionalProperties}">
+					<li class="list-inline-item" th:text="${prop.getKey() + ' - ' + prop.getValue()}">Property</li>
+				</ul>
+			</li>
+			<li class="list-group-item" th:text="${'Topic: ' + incident.topic}">Incident topic</li>
+			<li class="list-group-item" th:text="${'Status: ' + incident.status}">Incident status</li>
 		</ul>
 		<div class="card-body">
 			<a href="/dashboard" class="card-link">⬅ Go back</a>
