@@ -39,11 +39,8 @@ public class DashboardController {
 		model.addAttribute("incidentsList", incidentsList);
 		model.addAttribute("loggedUser", loggedUser);
 		model.addAttribute("countIncidents", countIncidents);
-<<<<<<< HEAD
 		model.addAttribute("localizaciones", localizaciones);
-=======
 		model.addAttribute("countStatus", countStatus);
->>>>>>> Pedro
 		return "dashboard";
 	}
 

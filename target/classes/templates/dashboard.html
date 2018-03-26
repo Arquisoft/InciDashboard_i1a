@@ -54,12 +54,13 @@
 					<h3>Topic barchart</h3>
 				</div>
 				<div class="card-body">
-					<div class="container">
-						<canvas id="myChart" width="150" height="150"></canvas>
-					</div>
-					<script type="text/javascript" th:inline="javascript">
+
+				<div class="container">
+					<canvas id="barChart" width="150" height="150"></canvas>
+				</div>
+				<script type="text/javascript" th:inline="javascript">
 					/*<![CDATA[*/
-					var ctx = document.getElementById("myChart").getContext(
+					var ctx = document.getElementById("barChart").getContext(
 							'2d');
 					var myChart = new Chart(
 							ctx,
@@ -69,7 +70,7 @@
 									labels : [ "Accident", "Fire", "Alterc",
 											"Medical", "Meteo", "Other" ],
 									datasets : [ {
-										label : 'Number of incidents',
+										label: 'No. of incidents',
 										data : [
 												"[[${countIncidents.get('ACCIDENT')}]]",
 												"[[${countIncidents.get('FIRE')}]]",
@@ -93,11 +94,15 @@
 										borderWidth : 1
 									} ]
 								},
-								options : {
+								options: {
+									responsive: true,
+									legend: {
+										position: 'top',
+									},
 									scales : {
 										yAxes : [ {
 											ticks : {
-												fixedStepSize: 1,
+												fixedStepSize: 2,
 												beginAtZero : true
 											}
 										} ]
@@ -111,12 +116,54 @@
 		</div>
 		<div class="col-sm-6">
 			<div class="card">
-				<div class="card-header">
-					<h3>Another chart</h3>
-				</div>
+				<div class="card-header"><h3>Status chart</h3></div>
 				<div class="card-body">
-					<h5>It should goes here</h5>
-					<p class="card-text">Coming soon...</p>
+				<div class="container">
+					<canvas id="doughChart"></canvas>
+				</div>
+				<script type="text/javascript" th:inline="javascript">
+				var config = {
+					type: 'doughnut',
+					data: {
+						datasets: [{
+							data: [
+								"[[${countStatus.get('OPEN')}]]",
+								"[[${countStatus.get('IN_PROCESS')}]]",
+								"[[${countStatus.get('CLOSED')}]]",
+								"[[${countStatus.get('CANCELLED')}]]",
+							],
+							backgroundColor: [
+								'rgb(255, 99, 132)',
+								'rgb(255, 205, 86)',
+								'rgb(75, 192, 192)',
+								'rgb(54, 162, 235)',
+							],
+							label: 'Status dataset'
+						}],
+						labels: [
+							'Open',
+							'In Process',
+							'Closed',
+							'Cancelled'
+						]
+					},
+					options: {
+						responsive: true,
+						legend: {
+							position: 'top',
+						},
+						animation: {
+							animateScale: true,
+							animateRotate: true
+						}
+					}
+				};
+
+				window.onload = function() {
+					var ctx = document.getElementById('doughChart').getContext('2d');
+					window.myDoughnut = new Chart(ctx, config);
+				};
+				</script>
 				</div>
 			</div>
 		</div>
@@ -157,10 +204,8 @@
 						<td>
 							<div class="btn-group" role="group" aria-label="Options">
 								<button type="button" class="btn btn-secondary">Details</button>
-								<button type="button" class="btn btn-secondary">Option
-									2</button>
-								<button type="button" class="btn btn-secondary">Option
-									3</button>
+								<button type="button" class="btn btn-secondary">Change Status</button>
+								<button type="button" class="btn btn-secondary">Option 3</button>
 							</div>
 						</td>
 					</tr>
