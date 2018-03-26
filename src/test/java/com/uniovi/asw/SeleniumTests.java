@@ -1,16 +1,7 @@
 package com.uniovi.asw;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.Before;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-
-
 public class SeleniumTests {
+	/*
 	static String PathFirefox = "C:\\Users\\David\\Downloads\\Firefox46.win\\FirefoxPortable.exe";
 	static WebDriver driver = getDriver(PathFirefox);
 	static String URL = "http://localhost:8090";
@@ -101,4 +92,5 @@ public class SeleniumTests {
 		Assert.assertTrue(driver.getCurrentUrl() + " vs " + URL + "/login\n",
 				driver.getCurrentUrl().equalsIgnoreCase(URL + "/login"));
 	}
+	*/
 }
