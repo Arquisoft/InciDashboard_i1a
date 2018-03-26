@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uniovi.asw.entities.Incident;
 import com.uniovi.asw.entities.Incident.IncidentStatus;
 import com.uniovi.asw.entities.Operator;
+import com.uniovi.asw.services.AgentService;
 import com.uniovi.asw.services.IncidentService;
 import com.uniovi.asw.services.OperatorService;
 
@@ -31,6 +32,9 @@ public class IncidentListener {
 	
 	@Autowired
 	private OperatorService operatorService;
+	
+	@Autowired
+	private AgentService agentService;
 	
 	private static final Logger logger = Logger.getLogger(IncidentListener.class);
 
@@ -78,6 +82,7 @@ public class IncidentListener {
 			Random r = new Random();
 			Operator operatorAssigned = operatorService.getOperators().get(r.nextInt(operatorService.getOperators().size()));
 			incident.setOperator(operatorAssigned);
+			agentService.saveAgentIfNotExist(incident.getAgent());
 			incidentService.saveIncident(incident);
 		} catch (IOException e) {
 			e.printStackTrace();

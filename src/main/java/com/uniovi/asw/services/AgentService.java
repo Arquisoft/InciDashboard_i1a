@@ -11,13 +11,20 @@ import com.uniovi.asw.repositories.AgentRepository;
 public class AgentService {
 
 	@Autowired
-	private AgentRepository operatorRepository;
+	private AgentRepository agentRepository;
 	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	public void saveAgent(Agent agent) {
 		agent.setPassword(bCryptPasswordEncoder.encode(agent.getPassword()));
-		operatorRepository.save(agent);
+		agentRepository.save(agent);
+	}
+
+	public void saveAgentIfNotExist(Agent agent) {
+		Long id = Long.parseLong(agent.getId());
+		Agent a = agentRepository.findOne(id);
+		if (a == null)
+			agentRepository.save(agent);
 	}
 }
