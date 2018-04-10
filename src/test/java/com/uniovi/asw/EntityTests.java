@@ -43,26 +43,44 @@ public class EntityTests {
 		Assert.assertTrue(agent.equals(agent2));
 		Operator op = new Operator("police", "police");
 		Assert.assertFalse(agent.equals(op));
+		agent.setIdautogenerado("a");
+		Assert.assertFalse(agent.equals(agent2));
+		agent.setIdautogenerado(agent2.getIdautogenerado());
+		Assert.assertEquals(agent2.getIdautogenerado(), agent.getIdautogenerado());
+		Assert.assertTrue(agent.getKind() == 0);
+		agent.setKind(1);
+		Assert.assertFalse(agent.equals(agent2));
+		agent.setKind(0);
+		Assert.assertTrue(agent.equals(agent2));
+		Assert.assertTrue(agent.equals(agent2));
 		agent.setId("125L");
 		Assert.assertEquals("125L", agent.getId());
+		Assert.assertFalse(agent.equals(agent2));
+		agent.setId("500b");
+		Assert.assertTrue(agent.equals(agent2));
 		agent.setEmail("alejandro@mail.com");
 		Assert.assertEquals("alejandro@mail.com", agent.getEmail());
-		agent.setKind(0);
-		Assert.assertTrue(agent.getKind() == 0);
-		agent2.setName("fernando");
 		Assert.assertFalse(agent.equals(agent2));
+		agent.setEmail("alex@mail.com");
+		Assert.assertTrue(agent.equals(agent2));
+		agent.setName("fernando");
+		Assert.assertEquals("fernando", agent.getName());
+		Assert.assertFalse(agent.equals(agent2));
+		agent.setName("alejandro");
+		Assert.assertTrue(agent.equals(agent2));
 		Assert.assertEquals("alejandro", agent.getName());
 		Assert.assertEquals("123456", agent.getPassword());
-		agent.setName("noalejandro");
-		Assert.assertEquals("noalejandro", agent.getName());
 		agent.setPassword("contraseñasegura");
+		Assert.assertFalse(agent.equals(agent2));
 		Assert.assertEquals("contraseñasegura", agent.getPassword());
+		agent.setPassword("123456");
+		Assert.assertTrue(agent.equals(agent2));
 		Assert.assertEquals("23.273425,-15.694777", agent.getLocation());
 		agent.setLocation("26.25,-10.77");
+		Assert.assertFalse(agent.equals(agent2));
 		Assert.assertEquals("26.25,-10.77", agent.getLocation());
-		agent.setIdautogenerado("125L");
-		agent2.setIdautogenerado("126L");
-		Assert.assertEquals("125L", agent.getIdautogenerado());
+		agent.setLocation("23.273425,-15.694777");
+		Assert.assertTrue(agent.equals(agent2));
 	}
 
 	// Operators
@@ -104,6 +122,11 @@ public class EntityTests {
 		op.setIncidents(new ArrayList<Incident>());
 		Assert.assertFalse(op.getIncidents().contains(incident));
 		Assert.assertEquals(op.getIncidents().size(), 0);
+		op.setUsername(null);
+		op.setPassword(null);
+		Assert.assertEquals(31 * 31, op.hashCode());
+		op.setPassword(op2.getPassword());
+		Assert.assertNotEquals(op2, op);
 	}
 
 	// Incidents
@@ -111,11 +134,11 @@ public class EntityTests {
 	public void PR03() {
 		Agent agent = new Agent("700c", "pablo", "pablo", "25.0,25.0");
 		Operator op = new Operator("fireman", "fireman");
+		Operator op2 = new Operator("policeman", "policeman");
 		Incident incident = createIncident(agent, op, "Fire", "Fire spotted in the woods", 25.0, 25.0);
 
 		Assert.assertTrue(incident.isAssignedTo(op.getUsername()));
-
-		Assert.assertEquals("Fire", incident.getIncidentName());
+		Assert.assertFalse(incident.isAssignedTo(op2.getUsername()));
 		incident.setIncidentName("Not fire");
 		Assert.assertNotEquals("Fire", incident.getIncidentName());
 		Assert.assertEquals("Not fire", incident.getIncidentName());
@@ -197,11 +220,16 @@ public class EntityTests {
 		Message msg3 = new Message("accident", "ACCIDENT");
 		Assert.assertNotEquals(msg1, msg3);
 		Message msg4 = new Message();
+		Assert.assertEquals(31 * 31, msg4.hashCode());
 		Assert.assertNotEquals(msg4, msg1);
+		Message msg8 = new Message(null, null);
+		Assert.assertEquals(msg4, msg8);
 		Message msg5 = new Message("accident", null);
 		Assert.assertNotEquals(msg5, msg3);
-		Message msg6 = new Message("accident", "NOT_ACCIDENT");
-		Assert.assertNotEquals(msg6, msg3);
+		Message msg6 = new Message("accident", null);
+		Assert.assertEquals(msg5, msg6);
+		Message msg7 = new Message("accident", "NOT_ACCIDENT");
+		Assert.assertNotEquals(msg7, msg3);
 	}
 
 	// LatLng
