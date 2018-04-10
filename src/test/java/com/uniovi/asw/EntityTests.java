@@ -28,9 +28,21 @@ public class EntityTests {
 	@Test
 	public void PR01() {
 		Agent agent = new Agent("500b", "alejandro", "123456", "23.273425,-15.694777");
+		agent.setKind(0);
+		agent.setEmail("alex@mail.com");
+		Assert.assertEquals(agent.toString(),
+				"AgentInfo{" + "idautogenerado='" + agent.getIdautogenerado() + '\'' + ", name='" + agent.getName()
+						+ '\'' + ", email='" + agent.getEmail() + '\'' + ", password='" + agent.getPassword() + '\''
+						+ ", location='" + agent.getLocation() + '\'' + ", id='" + agent.getId() + '\'' + ", kind="
+						+ agent.getKind() + "}");
+		int hash1 = agent.hashCode();
 		Assert.assertFalse(agent.equals(null));
-		Agent agent2 = new Agent("500b", "alejandro", "123456", "23.273425,-15.694777");
+		String[] data = { "alejandro", "alex@mail.com", "123456", "23.273425,-15.694777", "500b", "0" };
+		Agent agent2 = new Agent(data);
+		Assert.assertEquals(hash1, agent2.hashCode());
 		Assert.assertTrue(agent.equals(agent2));
+		Operator op = new Operator("police", "police");
+		Assert.assertFalse(agent.equals(op));
 		agent.setId("125L");
 		Assert.assertEquals("125L", agent.getId());
 		agent.setEmail("alejandro@mail.com");
@@ -57,14 +69,31 @@ public class EntityTests {
 	@Test
 	public void PR02() {
 		Operator op = new Operator("firestation", "firestation");
+		Agent ag = new Agent("500b", "alejandro", "123456", "23.273425,-15.694777");
+		Assert.assertNotEquals(op, ag);
 		Assert.assertFalse(op.equals(null));
 		Operator op2 = new Operator("firestation", "firestation");
+		int hash1 = op.hashCode();
+		Assert.assertEquals(hash1, op2.hashCode());
 		Assert.assertTrue(op.equals(op2));
 		Assert.assertEquals("firestation", op.getUsername());
+		op.setUsername(null);
+		Assert.assertFalse(op.equals(op2));
+		op2.setUsername(null);
+		Assert.assertTrue(op.equals(op2));
 		op.setUsername("policeman");
+		op2.setUsername("policeman");
+		Assert.assertNotEquals(hash1, op.hashCode());
 		Assert.assertEquals("policeman", op.getUsername());
 		Assert.assertEquals("firestation", op.getPassword());
+		op.setPassword(null);
+		Assert.assertFalse(op.equals(op2));
+		op2.setPassword(null);
+		Assert.assertTrue(op.equals(op2));
 		op.setPassword("policeman");
+		Assert.assertFalse(op.equals(op2));
+		op2.setPassword("policeman");
+		Assert.assertTrue(op.equals(op2));
 		Assert.assertEquals("policeman", op.getPassword());
 		op.setId(100L);
 		op2.setId(101L);
@@ -80,9 +109,12 @@ public class EntityTests {
 	// Incidents
 	@Test
 	public void PR03() {
-		Agent agent = new Agent("700c","pablo", "pablo", "25.0,25.0");
+		Agent agent = new Agent("700c", "pablo", "pablo", "25.0,25.0");
 		Operator op = new Operator("fireman", "fireman");
 		Incident incident = createIncident(agent, op, "Fire", "Fire spotted in the woods", 25.0, 25.0);
+
+		Assert.assertTrue(incident.isAssignedTo(op.getUsername()));
+
 		Assert.assertEquals("Fire", incident.getIncidentName());
 		incident.setIncidentName("Not fire");
 		Assert.assertNotEquals("Fire", incident.getIncidentName());
@@ -101,7 +133,7 @@ public class EntityTests {
 		Assert.assertTrue(incident.getAditionalProperties().containsKey("p2"));
 
 		Assert.assertEquals(incident.getAgent(), agent);
-		Agent carolina = new Agent("300z","carolina", "contraseña", "30.0,30.0");
+		Agent carolina = new Agent("300z", "carolina", "contraseña", "30.0,30.0");
 		incident.setAgent(carolina);
 		Assert.assertNotEquals(incident.getAgent(), agent);
 		Assert.assertEquals(incident.getAgent(), carolina);
@@ -166,12 +198,17 @@ public class EntityTests {
 	@Test
 	public void PR05() {
 		LatLng ll1 = new LatLng(25.0, 25.0);
+		LatLng location2 = new LatLng(25.0, 25.0);
+		Assert.assertEquals(ll1.hashCode(), location2.hashCode());
+		Assert.assertTrue(ll1.equals(ll1));
+		Assert.assertFalse(ll1.equals(new Object()));
 		Assert.assertNotEquals(ll1, null);
 		LatLng ll2 = new LatLng(25.0, 25.0);
 		Assert.assertEquals(ll1, ll2);
 		Assert.assertTrue(25.0 == ll1.getLat());
 		ll1.setLat(24.0);
 		Assert.assertTrue(24.0 == ll1.getLat());
+		Assert.assertFalse(25.0 == ll1.getLat());
 		Assert.assertNotEquals(ll1, ll2);
 		ll1.setLat(25.0);
 		Assert.assertEquals(ll1, ll2);
