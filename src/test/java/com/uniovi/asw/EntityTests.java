@@ -200,7 +200,7 @@ public class EntityTests {
 		Assert.assertNotEquals(msg4, msg1);
 		Message msg5 = new Message("accident", null);
 		Assert.assertNotEquals(msg5, msg3);
-		Message msg6 = new Message("accident", "UNLUCKY");
+		Message msg6 = new Message("accident", "NOT_ACCIDENT");
 		Assert.assertNotEquals(msg6, msg3);
 	}
 
