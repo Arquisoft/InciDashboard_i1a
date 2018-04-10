@@ -1,8 +1,10 @@
 package com.uniovi.asw;
 
+import static org.junit.Assert.assertTrue;
+
+import java.util.concurrent.TimeUnit;
+
 import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -12,7 +14,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 public class SeleniumTests {
 	static WebDriver driver;
-	static String URL = "http://localhost:8090";
+	static String baseUrl = "http://localhost:8090";
 	protected static int timeout = 4;
 
 	private static void wait(WebDriver driver, int secs) {
@@ -29,16 +31,12 @@ public class SeleniumTests {
 	@Before
 	public void setUp() {
 		driver = new HtmlUnitDriver();
-		driver.navigate().to(URL);
+		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+		driver.get(baseUrl);
 	}
 
 	@After
 	public void tearDown() {
-		driver.manage().deleteAllCookies();
-	}
-
-	@AfterClass
-	static public void end() {
 		driver.quit();
 	}
 
@@ -61,8 +59,7 @@ public class SeleniumTests {
 		driver.findElement(By.id("loginButton")).click();
 		wait(driver, 1);
 		// Comprobamos que seguimos en el login
-		Assert.assertTrue(driver.getCurrentUrl() + " vs " + URL + "/login\n",
-				driver.getCurrentUrl().equalsIgnoreCase(URL + "/login?error=true"));
+		assertTrue(driver.getCurrentUrl().equalsIgnoreCase(baseUrl + "/login?error=true"));
 	}
 
 	// Inicio de sesión con datos válidos (user: admin, pwd: admin)
@@ -84,18 +81,16 @@ public class SeleniumTests {
 		driver.findElement(By.id("loginButton")).click();
 		wait(driver, 1);
 		// Comprobamos que entramos al dashboard
-		Assert.assertTrue(driver.getCurrentUrl() + " vs " + URL + "/dashboard\n",
-				driver.getCurrentUrl().equalsIgnoreCase(URL + "/dashboard"));
+		assertTrue(driver.getCurrentUrl().equalsIgnoreCase(baseUrl + "/dashboard"));
 	}
 
 	// Acceso al dashboard sin autentificación
 	@Test
 	public void PR03() {
 		// Tratamos de navegar al dashboard
-		driver.navigate().to(URL + "/dashboard");
+		driver.navigate().to(baseUrl + "/dashboard");
 		wait(driver, 1);
 		// Comprobamos que hemos sido redirigidos al login
-		Assert.assertTrue(driver.getCurrentUrl() + " vs " + URL + "/login\n",
-				driver.getCurrentUrl().equalsIgnoreCase(URL + "/login"));
+		assertTrue(driver.getCurrentUrl().equalsIgnoreCase(baseUrl + "/login"));
 	}
 }
