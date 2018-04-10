@@ -41,7 +41,6 @@ public class SeleniumTests {
 	}
 
 	// Inicio de sesión con datos inválidos (usuario no existente en la aplicación)
-	@Test
 	public void PR01() {
 		// Vamos al formulario de logueo.
 		driver.findElement(By.id("indexLoginButton")).click();
@@ -63,7 +62,6 @@ public class SeleniumTests {
 	}
 
 	// Inicio de sesión con datos válidos (user: admin, pwd: admin)
-	@Test
 	public void PR02() {
 		// Vamos al formulario de logueo.
 		driver.findElement(By.id("indexLoginButton")).click();
@@ -85,7 +83,6 @@ public class SeleniumTests {
 	}
 
 	// Acceso al dashboard sin autentificación
-	@Test
 	public void PR03() {
 		// Tratamos de navegar al dashboard
 		driver.navigate().to(baseUrl + "/dashboard");
