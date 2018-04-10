@@ -185,13 +185,23 @@ public class EntityTests {
 	@Test
 	public void PR04() {
 		Message msg1 = new Message("fire", "FIRE");
-		Assert.assertNotEquals(null, msg1);
+		Assert.assertNotEquals(msg1, null);
+		Assert.assertEquals(msg1, msg1);
+		Operator op = new Operator("fireman", "fireman");
+		Assert.assertNotEquals(msg1, op);
 		Message msg2 = new Message("fire", "FIRE");
 		Assert.assertEquals(msg1, msg2);
+		Assert.assertEquals(msg1.hashCode(), msg2.hashCode());
 		Assert.assertEquals("fire", msg1.getMessage());
 		Assert.assertEquals("FIRE", msg1.getTopic());
 		Message msg3 = new Message("accident", "ACCIDENT");
 		Assert.assertNotEquals(msg1, msg3);
+		Message msg4 = new Message();
+		Assert.assertNotEquals(msg4, msg1);
+		Message msg5 = new Message("accident", null);
+		Assert.assertNotEquals(msg5, msg3);
+		Message msg6 = new Message("accident", "UNLUCKY");
+		Assert.assertNotEquals(msg6, msg3);
 	}
 
 	// LatLng

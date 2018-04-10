@@ -5,7 +5,7 @@ public class Message {
 	String message;
 	String topic;
 
-	Message() {
+	public Message() {
 
 	}
 
