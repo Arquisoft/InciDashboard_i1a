@@ -1,17 +1,19 @@
 package com.uniovi.asw;
 
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+
 public class SeleniumTests {
-	/*
-	static String PathFirefox = "C:\\Users\\David\\Downloads\\Firefox46.win\\FirefoxPortable.exe";
-	static WebDriver driver = getDriver(PathFirefox);
+	static WebDriver driver;
 	static String URL = "http://localhost:8090";
 	protected static int timeout = 4;
-
-	public static WebDriver getDriver(String PathFirefox) {
-		System.setProperty("webdriver.firefox.bin", PathFirefox);
-		WebDriver driver = new FirefoxDriver();
-		return driver;
-	}
 
 	private static void wait(WebDriver driver, int secs) {
 
@@ -26,6 +28,7 @@ public class SeleniumTests {
 
 	@Before
 	public void setUp() {
+		driver = new HtmlUnitDriver();
 		driver.navigate().to(URL);
 	}
 
@@ -40,6 +43,7 @@ public class SeleniumTests {
 	}
 
 	// Inicio de sesión con datos inválidos (usuario no existente en la aplicación)
+	@Test
 	public void PR01() {
 		// Vamos al formulario de logueo.
 		driver.findElement(By.id("indexLoginButton")).click();
@@ -62,6 +66,7 @@ public class SeleniumTests {
 	}
 
 	// Inicio de sesión con datos válidos (user: admin, pwd: admin)
+	@Test
 	public void PR02() {
 		// Vamos al formulario de logueo.
 		driver.findElement(By.id("indexLoginButton")).click();
@@ -84,6 +89,7 @@ public class SeleniumTests {
 	}
 
 	// Acceso al dashboard sin autentificación
+	@Test
 	public void PR03() {
 		// Tratamos de navegar al dashboard
 		driver.navigate().to(URL + "/dashboard");
@@ -92,5 +98,4 @@ public class SeleniumTests {
 		Assert.assertTrue(driver.getCurrentUrl() + " vs " + URL + "/login\n",
 				driver.getCurrentUrl().equalsIgnoreCase(URL + "/login"));
 	}
-	*/
 }
