@@ -19,6 +19,7 @@ import com.uniovi.asw.entities.Incident;
 import com.uniovi.asw.entities.Incident.IncidentStatus;
 import com.uniovi.asw.entities.Message;
 import com.uniovi.asw.entities.Operator;
+import com.uniovi.asw.parser.IncidentDeserializer;
 import com.uniovi.asw.util.LatLng;
 
 @RunWith(SpringRunner.class)
@@ -254,6 +255,16 @@ public class EntityTests {
 		ll1.setLng(24.0);
 		Assert.assertTrue(24.0 == ll1.getLng());
 		Assert.assertNotEquals(ll1, ll2);
+	}
+
+	// IncidentDeserializer
+	@Test
+	public void PR06() {
+		IncidentDeserializer id = new IncidentDeserializer();
+		id.configure(null, false);
+		Incident i = id.deserialize("FIRE", null);
+		Assert.assertEquals(i, null);
+		id.close();
 	}
 
 	private Incident createIncident(Agent agent, Operator op, String name, String desc, double lat, double lng) {
