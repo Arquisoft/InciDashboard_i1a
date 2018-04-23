@@ -1,8 +1,6 @@
 package com.uniovi.asw.util;
 
-import javax.persistence.Embeddable;
 
-@Embeddable
 public class LatLng {
 
 	private double lat;

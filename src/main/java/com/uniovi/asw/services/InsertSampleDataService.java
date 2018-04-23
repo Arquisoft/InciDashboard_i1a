@@ -31,15 +31,28 @@ public class InsertSampleDataService {
 	private IncidentService incidentService;
 
 	@Autowired
-	private AgentService agentService;
-
-	@Autowired
 	private TopicService topicsService;
+	
+	@Autowired
+	private AgentService agentService;
 
 	private Random r = new Random();
 
 	@PostConstruct
 	public void init() {
+		
+		if (!operatorService.getOperators().isEmpty()) {
+			for (Operator o : operatorService.getOperators()) {
+				operatorService.deleteOperator(o);
+			}
+		}
+		
+		if (!incidentService.getIncidents().isEmpty()) {
+			for (Incident i : incidentService.getIncidents()) {
+				incidentService.delete(i);
+			}
+		}
+		
 		// Adding some Operators
 		Operator admin = new Operator("admin", "admin");
 		Operator police = new Operator("police", "police");
@@ -48,22 +61,10 @@ public class InsertSampleDataService {
 		operatorService.saveOperator(police);
 		operatorService.saveOperator(firestation);
 
-		// Adding some Agents
-		List<Agent> agents = new ArrayList<Agent>();
-
-		Agent agent1 = new Agent("1", "pepe", "123456", "43.271934,-6.610977");
-		Agent agent2 = new Agent("2","maria", "123456", "43.348625,-5.127593");
-		Agent agent3 = new Agent("3","juan", "123456", "43.170862,-5.176625");
-		agentService.saveAgent(agent1);
-		agents.add(agent1);
-		agentService.saveAgent(agent2);
-		agents.add(agent2);
-		agentService.saveAgent(agent3);
-		agents.add(agent3);
-
 		// Adding some Incidents randomly
 		// 50 incidents, 5 tags, 5 aditional props. using existing agents
-		generateRandomIncidents(100, 5, 5, agents);
+		List<Agent> agents = agentService.getAgents();
+		generateRandomIncidents(10, 5, 5, agents);
 	}
 
 	private void generateRandomIncidents(int numINcidents, int numTags, int numAddProp, List<Agent> agents) {
@@ -114,5 +115,6 @@ public class InsertSampleDataService {
 		}
 		return prop;
 	}
+	
 
 }

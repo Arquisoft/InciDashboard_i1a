@@ -2,22 +2,19 @@ package com.uniovi.asw.entities;
 
 import java.util.Objects;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
+@Document(collection = "loader_i1a_collection") // Esta coleccion se usa para la bd remota
 public class Agent {
 
-	
+	@Id
 	private String idautogenerado;
 
 	private String name;
 	private String email;
 	private String password;
 	private String location;
-	
-	@Id
 	private String id;
 	private int kind;
 
@@ -36,13 +33,6 @@ public class Agent {
 
 	public Agent(String name, String email, String password, String location, String id, int kind) {
 		this(name, email, password, id, kind);
-		this.location = location;
-	}
-
-	public Agent(String id, String name, String password, String location) {
-		this.id=id;
-		this.name = name;
-		this.password = password;
 		this.location = location;
 	}
 
@@ -82,10 +72,6 @@ public class Agent {
 		return this.kind;
 	}
 
-	public void setIdautogenerado(String idautogenerado) {
-		this.idautogenerado = idautogenerado;
-	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -106,11 +92,12 @@ public class Agent {
 		this.kind = kind;
 	}
 
+	
 	@Override
 	public String toString() {
-		return "AgentInfo{" + "idautogenerado='" + idautogenerado + '\'' + ", name='" + name + '\'' + ", email='"
-				+ email + '\'' + ", password='" + password + '\'' + ", location='" + location + '\'' + ", id='" + id
-				+ '\'' + ", kind=" + kind + "}";
+		return "Agent [idautogenerado='" + idautogenerado + "', name='" + name + "', email='"
+				+ email + "', password='" + password + "', location='" + location + "', id='" + id
+				+ "', kind=" + kind + "]";
 	}
 
 	@Override
@@ -128,7 +115,7 @@ public class Agent {
 
 	@Override
 	public int hashCode() {
-
 		return Objects.hash(idautogenerado, name, email, password, location, id, kind);
 	}
+
 }

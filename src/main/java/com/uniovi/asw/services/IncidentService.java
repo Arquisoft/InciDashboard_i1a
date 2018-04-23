@@ -34,10 +34,14 @@ public class IncidentService {
 		return incidentRepository.findByTopic(topic);
 	}
 
-	public Incident getIncidentById(Long id) {
-		return incidentRepository.findById(id);
+	public Incident getIncidentById(String id) {
+		return incidentRepository.findByIdautogenerado(id);
 	}
 
+	public void delete(Incident i) {
+		incidentRepository.delete(i);
+	}
+	
 	public Map<String, Integer> getCountByTopic(List<Incident> incidentsList) {
 		Map<String, Integer> count = new HashMap<String, Integer>();
 		String[] topics = topicsService.getTopics();

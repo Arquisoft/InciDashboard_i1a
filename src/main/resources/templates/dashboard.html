@@ -70,7 +70,7 @@
 					</thead>
 					<tbody>
 						<tr th:each="incident : ${incidentsList}">
-							<th scope="row" th:text="${incident.id}">ID</th>
+							<th scope="row" th:text="${incident.idautogenerado}">ID</th>
 							<td th:text="${incident.agent.name}">Agent name</td>
 							<td th:text="${incident.incidentName}">Incident name</td>
 							<td><a
@@ -85,9 +85,9 @@
 							<td>
 								<div class="btn-group" role="group" aria-label="Options">
 									<a class="btn btn-secondary" role="button"
-										th:href="${'/incident/details/' + incident.id}">Details</a>
+										th:href="${'/incident/details/' + incident.idautogenerado}">Details</a>
 									<a class="btn btn-secondary" role="button" 
-										th:href="${'/incident/edit/' + incident.id}" th:if="${incident.isAssignedTo(loggedUser)}">Change status</a>
+										th:href="${'/incident/edit/' + incident.idautogenerado}" th:if="${incident.isAssignedTo(loggedUser)}">Change status</a>
 								</div>
 							</td>
 						</tr>
@@ -202,7 +202,6 @@
 								}
 							}
 						};
-
 						window.onload = function() {
 							var ctx = document.getElementById('doughChart')
 									.getContext('2d');
@@ -234,14 +233,10 @@
 					lng : -5.4138884
 				}
 			});
-
 			// Create an array of alphabetical characters used to label the markers.
 			var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
 			var contentString = '';
-
 			
-
 			// Add some markers to the map.
 			// Note: The code uses the JavaScript Array.prototype.map() method to
 			// create an array of markers based on a given "locations" array.
@@ -260,7 +255,6 @@
 				});
 				return marker;
 			});
-
 			// Add a marker clusterer to manage the markers.
 			var markerCluster = new MarkerClusterer(
 					map,

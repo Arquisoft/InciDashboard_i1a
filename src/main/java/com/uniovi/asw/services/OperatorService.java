@@ -3,7 +3,6 @@ package com.uniovi.asw.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.uniovi.asw.entities.Operator;
@@ -15,17 +14,19 @@ public class OperatorService {
 	@Autowired
 	private OperatorRepository operatorRepository;
 	
-	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	public void saveOperator(Operator operator) {
-		operator.setPassword(bCryptPasswordEncoder.encode(operator.getPassword()));
+		operator.setPassword(operator.getPassword());
 		operatorRepository.save(operator);
 	}
 	
 	public List<Operator> getOperators()
 	{
 		return operatorRepository.findAll();
+	}
+
+	public void deleteOperator(Operator o) {
+		operatorRepository.delete(o);
 	}
 	
 }

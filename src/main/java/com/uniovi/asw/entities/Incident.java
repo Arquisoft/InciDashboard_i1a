@@ -6,47 +6,28 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.uniovi.asw.util.LatLng;
 
-@Entity
+@Document(collection = "incident_i1a_collection")
 public class Incident {
 
 	@Id
-	@GeneratedValue
-	private Long id;
-	
-	@ManyToOne
-	@JoinColumn(name="agent_id")
-	private Agent agent;
+	private String idautogenerado;
 
+	private Agent agent;
 	private String incidentName;
 	private String description;
-	private LatLng location;
-	private String locationString;
-	private Date date;
-	private String aditionalPropertiesString;
-	
-	@ManyToOne
+	private List<String> tags = new ArrayList<String>();;
 	private Operator operator;
-
-	@ElementCollection(targetClass=String.class)
-	private List<String> tags = new ArrayList<String>();
-	
-	@ElementCollection(targetClass=String.class)
-	private Map<String, String> aditionalProperties = new HashMap<String, String>();
-	
 	private String topic;
-	
-	@Enumerated(EnumType.STRING)
+	private String locationString;
+	private LatLng location;
+	private Date date;
+	private Map<String, String> aditionalProperties = new HashMap<String, String>();
+	private String aditionalPropertiesString;
 	private IncidentStatus status;
 
 	public enum IncidentStatus {
@@ -66,11 +47,14 @@ public class Incident {
 		this.topic = topic;
 		this.status = status;
 		this.operator = operator;
-		operator.getIncidents().add(this);
+	}
+	
+	public Incident() {
+		this.status=IncidentStatus.OPEN;
 	}
 
-	public Incident() {
-
+	public String getIdautogenerado() {
+		return idautogenerado;
 	}
 
 	public Agent getAgent() {
@@ -136,10 +120,6 @@ public class Incident {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	
-	public Long getId() {
-		return id;
-	}
 
 	public Operator getOperator() {
 		return operator;
@@ -155,11 +135,6 @@ public class Incident {
 
 	public void setLocation(LatLng location) {
 		this.location = location;
-	}
-	
-	public boolean isAssignedTo(String username)
-	{
-		return (username.equals(operator.getUsername())) ? true : false;
 	}
 
 	public String getLocationString() {
@@ -177,5 +152,20 @@ public class Incident {
 	public void setAditionalPropertiesString(String aditionalPropertiesString) {
 		this.aditionalPropertiesString = aditionalPropertiesString;
 	}
+	
+	public boolean isAssignedTo(String username)
+	{
+		return (username.equals(operator.getUsername())) ? true : false;
+	}
+
+	@Override
+	public String toString() {
+		return "Incident [agent='" + agent + "', incidentName='" + incidentName + "', description='" + description
+				+ "', tags='" + tags + "', operator='" + operator + "', topic='" + topic + "', locationString='"
+				+ locationString + "', location='" + location + "', date='" + date + "', aditionalProperties='"
+				+ aditionalProperties + "', aditionalPropertiesString='" + aditionalPropertiesString + "', status='"
+				+ status + "']";
+	}
+	
 
 }
