@@ -41,6 +41,30 @@ public class InsertSampleDataService {
 	@PostConstruct
 	public void init() {
 		
+		deleteDataIfExists();
+		
+		// Adding some Operators
+		//Admin for OTHER
+		Operator admin = new Operator("admin", "admin");
+		//Police for ACCIDENT and ALTERCATION
+		Operator police = new Operator("police", "police");
+		//Fireman for FIRE and METHEO
+		Operator fireman = new Operator("fireman", "fireman");
+		//Doctor for MEDICAL
+		Operator doctor = new Operator("doctor", "doctor");
+		
+		operatorService.saveOperator(admin);
+		operatorService.saveOperator(police);
+		operatorService.saveOperator(fireman);
+		operatorService.saveOperator(doctor);
+
+		// Adding some Incidents randomly
+		// 50 incidents, 5 tags, 5 aditional props. using existing agents
+		List<Agent> agents = agentService.getAgents();
+		generateRandomIncidents(10, 5, 5, agents);
+	}
+
+	private void deleteDataIfExists() {
 		if (!operatorService.getOperators().isEmpty()) {
 			for (Operator o : operatorService.getOperators()) {
 				operatorService.deleteOperator(o);
@@ -52,19 +76,6 @@ public class InsertSampleDataService {
 				incidentService.delete(i);
 			}
 		}
-		
-		// Adding some Operators
-		Operator admin = new Operator("admin", "admin");
-		Operator police = new Operator("police", "police");
-		Operator firestation = new Operator("firestation", "firestation");
-		operatorService.saveOperator(admin);
-		operatorService.saveOperator(police);
-		operatorService.saveOperator(firestation);
-
-		// Adding some Incidents randomly
-		// 50 incidents, 5 tags, 5 aditional props. using existing agents
-		List<Agent> agents = agentService.getAgents();
-		generateRandomIncidents(10, 5, 5, agents);
 	}
 
 	private void generateRandomIncidents(int numINcidents, int numTags, int numAddProp, List<Agent> agents) {

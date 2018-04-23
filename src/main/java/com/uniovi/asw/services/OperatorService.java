@@ -29,4 +29,8 @@ public class OperatorService {
 		operatorRepository.delete(o);
 	}
 	
+	public Operator getOperator(String username)
+	{
+		return operatorRepository.findByUsername(username);
+	}
 }

@@ -2,7 +2,6 @@ package com.uniovi.asw.listeners;
 
 import java.io.IOException;
 import java.util.Properties;
-import java.util.Random;
 
 import javax.annotation.ManagedBean;
 
@@ -76,12 +75,39 @@ public class IncidentListener {
 			ObjectMapper obj = new ObjectMapper();
 			Incident incident = obj.readValue(data.getBytes(), Incident.class);
 			incident.setStatus(IncidentStatus.OPEN);
-			Random r = new Random();
-			Operator operatorAssigned = operatorService.getOperators().get(r.nextInt(operatorService.getOperators().size()));
-			incident.setOperator(operatorAssigned);
+			assingOperator(incident);
 			incidentService.saveIncident(incident);
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	private void assingOperator(Incident i) {
+		Operator admin = operatorService.getOperator("admin");
+		Operator police = operatorService.getOperator("police");
+		Operator fireman = operatorService.getOperator("fireman");
+		Operator doctor = operatorService.getOperator("doctor");
+		
+		switch (i.getTopic()) {
+			case "OTHER":
+				i.setOperator(admin);
+				break;
+			case "FIRE":
+				i.setOperator(fireman);
+				break;
+			case "METEREOLOGICAL_PHENOMENON":
+				i.setOperator(fireman);
+				break;
+			case "ACCIDENT":
+				i.setOperator(police);
+				break;
+			case "ALTERCATION":
+				i.setOperator(police);
+				break;
+			case "MEDICAL_EMERGENCY":
+				i.setOperator(doctor);
+				break;
+				
 		}
 	}
 
