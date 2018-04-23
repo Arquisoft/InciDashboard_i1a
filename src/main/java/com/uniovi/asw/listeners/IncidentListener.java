@@ -12,9 +12,7 @@ import org.springframework.kafka.annotation.KafkaListener;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uniovi.asw.entities.Incident;
 import com.uniovi.asw.entities.Incident.IncidentStatus;
-import com.uniovi.asw.entities.Operator;
 import com.uniovi.asw.services.IncidentService;
-import com.uniovi.asw.services.OperatorService;
 
 
 /**
@@ -26,11 +24,7 @@ public class IncidentListener {
 	Properties props = new Properties();
 	
 	@Autowired
-	private IncidentService incidentService;
-	
-	@Autowired
-	private OperatorService operatorService;
-	
+	private IncidentService incidentService;	
 	
 	private static final Logger logger = Logger.getLogger(IncidentListener.class);
 
@@ -75,40 +69,13 @@ public class IncidentListener {
 			ObjectMapper obj = new ObjectMapper();
 			Incident incident = obj.readValue(data.getBytes(), Incident.class);
 			incident.setStatus(IncidentStatus.OPEN);
-			assingOperator(incident);
+			incidentService.assingOperator(incident);
 			incidentService.saveIncident(incident);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	private void assingOperator(Incident i) {
-		Operator admin = operatorService.getOperator("admin");
-		Operator police = operatorService.getOperator("police");
-		Operator fireman = operatorService.getOperator("fireman");
-		Operator doctor = operatorService.getOperator("doctor");
-		
-		switch (i.getTopic()) {
-			case "OTHER":
-				i.setOperator(admin);
-				break;
-			case "FIRE":
-				i.setOperator(fireman);
-				break;
-			case "METEREOLOGICAL_PHENOMENON":
-				i.setOperator(fireman);
-				break;
-			case "ACCIDENT":
-				i.setOperator(police);
-				break;
-			case "ALTERCATION":
-				i.setOperator(police);
-				break;
-			case "MEDICAL_EMERGENCY":
-				i.setOperator(doctor);
-				break;
-				
-		}
-	}
+	
 
 }

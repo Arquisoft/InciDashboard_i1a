@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.uniovi.asw.entities.Incident;
 import com.uniovi.asw.entities.Incident.IncidentStatus;
+import com.uniovi.asw.entities.Operator;
 import com.uniovi.asw.repositories.IncidentRepository;
 
 @Service
@@ -19,6 +20,9 @@ public class IncidentService {
 
 	@Autowired
 	private TopicService topicsService;
+	
+	@Autowired
+	private OperatorService operatorService;
 
 	public void saveIncident(Incident incident) {
 		incidentRepository.save(incident);
@@ -74,4 +78,32 @@ public class IncidentService {
 		return count;
 	}
 
+	public void assingOperator(Incident i) {
+		Operator admin = operatorService.getOperator("admin");
+		Operator police = operatorService.getOperator("police");
+		Operator fireman = operatorService.getOperator("fireman");
+		Operator doctor = operatorService.getOperator("doctor");
+		
+		switch (i.getTopic()) {
+			case "OTHER":
+				i.setOperator(admin);
+				break;
+			case "FIRE":
+				i.setOperator(fireman);
+				break;
+			case "METEREOLOGICAL_PHENOMENON":
+				i.setOperator(fireman);
+				break;
+			case "ACCIDENT":
+				i.setOperator(police);
+				break;
+			case "ALTERCATION":
+				i.setOperator(police);
+				break;
+			case "MEDICAL_EMERGENCY":
+				i.setOperator(doctor);
+				break;
+				
+		}
+	}
 }
