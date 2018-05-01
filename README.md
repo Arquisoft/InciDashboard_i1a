@@ -5,7 +5,7 @@
 InciDashboard_i1a
 Incident Dashboard reading incidents sent from the IncidentManagement module through Apache Kafka
 
-#Team members
+## Team members
 - Pedro Blanco Suárez (UO251935)
 - Roberto Pérez Sánchez (UO250973)
 - Manuel García Fernández (UO250979)
@@ -17,7 +17,7 @@ Docker can be installed from https://docs.docker.com/toolbox/toolbox_install_win
 The next step will be to verify the installation. To do that, we will execute the Quickstart Launch of Docker. The terminal will setup several configuration aspects for us. Then, the $ of the shell will be prompt.
 Now we can execute a command for a brief example of hello world in Docker. To do that, execute docker run hello-world and the next information will be printed on the screen.
 
- `$ docker run hello-world
+ ```$ docker run hello-world
  Unable to find image 'hello-world:latest' locally
  Pulling repository hello-world
  91c95931e552: Download complete
@@ -39,4 +39,4 @@ Now we can execute a command for a brief example of hello world in Docker. To do
   $ docker run -it ubuntu bash
 
  For more examples and ideas, visit:
-  https://docs.docker.com/userguide/`
+  https://docs.docker.com/userguide/```
