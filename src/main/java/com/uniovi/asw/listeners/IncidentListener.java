@@ -15,9 +15,6 @@ import com.uniovi.asw.entities.Incident.IncidentStatus;
 import com.uniovi.asw.services.IncidentService;
 
 
-/**
- * Created by herminio on 28/12/16.
- */
 @ManagedBean
 public class IncidentListener {
 	// ACCIDENT FIRE ALTERCATION MEDICAL_EMERGENCY METEREOLOGICAL_PHENOMENON OTHER
