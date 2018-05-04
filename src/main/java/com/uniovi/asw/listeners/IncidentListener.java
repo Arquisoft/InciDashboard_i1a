@@ -5,7 +5,7 @@ import java.util.Properties;
 
 import javax.annotation.ManagedBean;
 
-import org.apache.log4j.Logger;
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 
