@@ -14,6 +14,13 @@ public class LatLng {
 	public LatLng() {
 
 	}
+	
+	public LatLng(String latlng)
+	{
+		String[] aux = latlng.split(",");
+		this.lat = Double.parseDouble(aux[0]);
+		this.lng = Double.parseDouble(aux[1]);
+	}
 
 	public double getLat() {
 		return lat;

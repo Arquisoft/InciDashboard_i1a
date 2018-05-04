@@ -40,6 +40,13 @@ public class Agent {
 		this(data[0], data[1], data[2], data[3], data[4], Integer.parseInt(data[5]));
 	}
 
+	public Agent(String idauto, String nombre, String password, String latlng) {
+		this.idautogenerado = idauto;
+		this.name = nombre;
+		this.password = password;
+		this.location = latlng;
+	}
+
 	public String getIdautogenerado() {
 		return idautogenerado;
 	}
@@ -116,6 +123,10 @@ public class Agent {
 	@Override
 	public int hashCode() {
 		return Objects.hash(idautogenerado, name, email, password, location, id, kind);
+	}
+
+	public void setIdautogenerado(String idautogenerado) {
+		this.idautogenerado = idautogenerado;
 	}
 
 }
