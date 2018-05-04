@@ -1,5 +1,5 @@
 [![codecov](https://codecov.io/gh/Arquisoft/InciDashboard_i1a/branch/master/graph/badge.svg)](https://codecov.io/gh/Arquisoft/InciDashboard_i1a)
-  [![Build Status](https://travis-ci.org/Arquisoft/InciDashboard_i1a.svg?branch=master)](https://travis-ci.org/Arquisoft/InciDashboard_i1a)
+[![Build Status](https://travis-ci.org/Arquisoft/InciDashboard_i1a.svg?branch=master)](https://travis-ci.org/Arquisoft/InciDashboard_i1a)
 
 # InciDashboard_i1a
 InciDashboard_i1a
@@ -73,4 +73,66 @@ Finally, we will execute Gatling to run the produced test.
 
 ```
 %GATLING_HOME%\bin\gatling.bat
+```
+
+## Cucumber integration
+Cucumber is used in the Incidence Dashboard Spring Boot project for enhancing the test section.
+With Cucumber the development team is able to make tests that can be run in front of the client. If they pass, then the application is running within expectations.
+Definitely, is the best approach to 'mix' User Stories and tests. That is, by writing User Stories the team will be able to test application functionalities.
+
+### Instalation
+Get started with Cucumber in Spring Boot is as simply as adding a new dependency to the Maven _pom.xml_ file. That is:
+
+```
+<dependency>
+    <groupId>io.cucumber</groupId>
+    <artifactId>cucumber-java</artifactId>
+    <version>2.4.0</version>
+    <scope>test</scope>
+</dependency>
+```
+
+Taking into account that in this case the wanted version is for Java with not support to lambda expressions (API 8).
+
+### Behavour-Driven Development with Cucumber
+The main schema is:
+    - Behavour: Mentioned User Stories.
+    - Specification by example.
+    - Executable specifications.
+    
+And one example (called Scenario in Cucumber) could be:
+
+```
+Feature: User management
+
+Scenario: Create first user
+
+  Given there are no users
+  When I create a user "Pepe" with password "Pepe12"
+  Then The number of users is 1
+```
+
+The Scenario should be saved in a _.feature_ file like ```user_management.feature```.
+
+And finally the steps should be defined as:
+
+```
+@Given("^there are no users$")
+public void there_are_no_users() throws Throwable 
+{
+    users = new UserDb();
+}
+
+@When("^I create a user \"(.+)\" with password \"(.+)\"$")
+public void i_create_a_user(String name, String password)
+throws Throwable 
+{
+    users.addUser(name,password);
+}
+
+@Then("^The number of users is (\\d+)$")
+public void the_number_of_users_is(int n) throws Throwable 
+{
+    assertThat(users.size()).isEqualTo(1);
+}
 ```
