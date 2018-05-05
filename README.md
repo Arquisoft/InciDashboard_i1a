@@ -47,18 +47,6 @@ Now we can execute a command for a brief example of hello world in Docker. To do
 ## Installation of Gatling
 We will use Gatling for testing the funcionality of the application. First of all we download it from https://gatling.io/download/. We unzip it and install it.
 
-### A simple test case
-We will be testing a computer database deployed in http://computer-database.gatling.io. To test the performance of this application, we will create scenarios representative of what really happens when users navigate it. Here is what a user normally do with the app.
-
-```
-1. A user arrives at the application.
-2. The user searches for ‘macbook’.
-3. The user opens one of the related models.
-4. The user goes back to home page.
-5. The user iterates through pages.
-6. The user creates a new model.
-```
-
 #### Recorder
 To ease the creation of the scenario, we will use the Recorder, a tool provided with Gatling that allows you to record your actions on a web application and export them as a Gatling scenario. This tool is launched with a script located in the bin directory (Windows):
 
@@ -67,6 +55,15 @@ To ease the creation of the scenario, we will use the Recorder, a tool provided 
 ```
 
 Once launched, the following GUI lets you configure how requests and responses will be recorded. After configuring the recorder, all you have to do is to start it and configure your browser to use Gatling Recorder’s proxy. Then, we use the application deployed in the previous URL and test it as we usually do.
+
+##### Configuration of Recorder
+For developing the tests using the recorder, we need some configuration. First of all, we have ti indicate the port that will be listening, in this case 8082. Then, we have to indicate some information of the package in which we want to save the tests, and the className of it. Finally, the output folder (our project) where we are going to save the test case.
+
+###### Proxy
+A configuration in the browser needs to be done. We are using Mozilla Firefox to perform our test. In the configuration, we will establish some important parameters of the Proxy. We go to the Proxy Configuration of Mozilla and set the "Manual Configuration". Then, set all the parameters to localhost:8082, and at the bottom, "Don't use proxy for:" we indicate the URLs that take part in the connection and manipulation of the dashboard: 192.168.99.100:8082, www.google.com/maps, maps.googleapis.com.
+
+##### Recording the tests
+Finally, we start the recording and navigate through the dashboard as a normal user would be. Gatling, automatically will generate some tests in the URL of the project that we previously specified, in the package and class name provided.
 
 #### Gatling
 Finally, we will execute Gatling to run the produced test.
