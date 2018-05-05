@@ -1,4 +1,4 @@
-package com.uniovi.asw.cucumber;
+package com.uniovi.asw.cucumber.steps;
 
 import org.junit.After;
 import org.junit.AfterClass;
