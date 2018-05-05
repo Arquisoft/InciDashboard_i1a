@@ -1,12 +1,14 @@
 package com.uniovi.asw.cucumber.steps;
 
+import java.util.concurrent.TimeUnit;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -14,21 +16,16 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 public class LoginStep {
-	static String PathFirefox = "C:\\Firefox46.win\\FirefoxPortable.exe";
-	static WebDriver driver = getDriver(PathFirefox);
+	static WebDriver driver;
 	static String URL = "http://192.168.99.100:8082";
-	
-	public static WebDriver getDriver(String PathFirefox) {
-		// Firefox 46.0 without geckodriver for Selenium 2.x.
-		System.setProperty("webdriver.firefox.bin", PathFirefox);
-		WebDriver driver = new FirefoxDriver();
-		return driver;
-	}
+	protected static int timeout = 4;
 	
 	// Before every test, navigate to URL
 	@Before
 	public void setUp() {
-		driver.navigate().to(URL);
+		driver = new HtmlUnitDriver();
+		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+		driver.get(URL);
 	}
 	
 	// After every test, delete browser's cookies
