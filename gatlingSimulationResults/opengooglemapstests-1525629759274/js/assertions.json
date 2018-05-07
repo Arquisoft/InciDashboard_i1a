@@ -1,0 +1,10 @@
+{
+  "simulation": "gatlingTests.OpenGoogleMapsTests",
+  "simulationId": "opengooglemapstests",
+  "start": 1525629759274,
+  "description": "",
+  "scenarios": ["OpenGoogleMapsTests"],
+  "assertions": [
+
+  ]
+}
