@@ -49,7 +49,7 @@ public class IncidentListener {
 		saveIncidentFromKafka(data);
 	}
 
-	@KafkaListener(topics = "METEREOLOGICAL_PHENOMENON")
+	@KafkaListener(topics = "METEOROLOGICAL_PHENOMENON")
 	public void listenMeteo(String data) {
 		logger.info("New message received: \"" + data + "\"");
 		saveIncidentFromKafka(data);
