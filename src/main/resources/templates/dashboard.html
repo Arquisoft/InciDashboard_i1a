@@ -14,9 +14,8 @@
 	crossorigin="anonymous">
 
 <!-- Using some scripts -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-	crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
 	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -32,8 +31,10 @@
 </script>
 
 <!-- Web Sockets -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
@@ -54,51 +55,55 @@
 		to the incidents dashboard. Logged as: someone</p>
 	</main>
 	<div class="row ml-4 mr-4 mt-4">
-		<div class="card m-5">
-			<div class="card-header">
-				<h3>Last incidents received</h3>
-			</div>
-			<div class="card-body">
-				<table class="table table-hover table-responsive">
-					<thead class="thead-light">
-						<tr>
-							<th scope="col">ID</th>
-							<th scope="col">Assigned agent</th>
-							<th scope="col">Name</th>
-							<th scope="col">Location</th>
-							<th scope="col">Date</th>
-							<th scope="col">Topic</th>
-							<th scope="col">Operator</th>
-							<th scope="col">Status</th>
-							<th scope="col">Options</th>
-						</tr>
-					</thead>
-					<tbody id="incidentsTable">
-						<tr th:each="incident : ${incidentsList}">
-							<th scope="row" th:text="${incident.idautogenerado}">ID</th>
-							<td th:text="${incident.agent.name}">Agent name</td>
-							<td th:text="${incident.incidentName}">Incident name</td>
-							<td><a
-								th:text="${incident.location.lat} + ', ' + ${incident.location.lng}"
-								th:href="'http://maps.google.com/maps?q=' + 
+		<div th:fragment="tableInci" id="tableInci">
+			<div class="card m-5">
+				<div class="card-header">
+					<h3>Last incidents received</h3>
+				</div>
+				<div class="card-body">
+					<table class="table table-hover table-responsive">
+						<thead class="thead-light">
+							<tr>
+								<th scope="col">ID</th>
+								<th scope="col">Assigned agent</th>
+								<th scope="col">Name</th>
+								<th scope="col">Location</th>
+								<th scope="col">Date</th>
+								<th scope="col">Topic</th>
+								<th scope="col">Operator</th>
+								<th scope="col">Status</th>
+								<th scope="col">Options</th>
+							</tr>
+						</thead>
+						<tbody id="incidentsTable">
+							<tr th:each="incident : ${incidentsList}">
+								<th scope="row" th:text="${incident.idautogenerado}">ID</th>
+								<td th:text="${incident.agent.name}">Agent name</td>
+								<td th:text="${incident.incidentName}">Incident name</td>
+								<td><a
+									th:text="${incident.location.lat} + ', ' + ${incident.location.lng}"
+									th:href="'http://maps.google.com/maps?q=' + 
 					    			${incident.location.lat} + ',' + ${incident.location.lng}">Incident
-									location</a></td>
-							<td th:text="${incident.date}">Incident date</td>
-							<td th:text="${incident.topic}">Incident topic</td>
-							<td th:text="${incident.operator.username}">Incident topic</td>
-							<td th:text="${incident.status}">Incident status</td>
-							<td>
-								<div id="options" class="btn-group" role="group" aria-label="Options">
-									<a class="btn btn-secondary" role="button" 
-										th:href="${'/incident/details/' + incident.idautogenerado}">Details</a>
-									<a class="btn btn-secondary" role="button"
-										th:href="${'/incident/edit/' + incident.idautogenerado}"
-										th:if="${incident.isAssignedTo(loggedUser)}">Change status</a>
-								</div>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+										location</a></td>
+								<td th:text="${incident.date}">Incident date</td>
+								<td th:text="${incident.topic}">Incident topic</td>
+								<td th:text="${incident.operator.username}">Incident topic</td>
+								<td th:text="${incident.status}">Incident status</td>
+								<td>
+									<div id="options" class="btn-group" role="group"
+										aria-label="Options">
+										<a class="btn btn-secondary" role="button"
+											th:href="${'/incident/details/' + incident.idautogenerado}">Details</a>
+										<a class="btn btn-secondary" role="button"
+											th:href="${'/incident/edit/' + incident.idautogenerado}"
+											th:if="${incident.isAssignedTo(loggedUser)}">Change
+											status</a>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 		<div class="col-sm-6">
@@ -108,10 +113,9 @@
 				</div>
 				<div class="card-body">
 
-					<div class="container">
+					<div class="container" th:fragment="barChartFragment" id="barChartFragment">
 						<canvas id="barChart" width="150" height="150"></canvas>
-					</div>
-					<script type="text/javascript" th:inline="javascript">
+						<script type="text/javascript" th:inline="javascript">
 						/*<![CDATA[*/
 						var ctx = document.getElementById("barChart")
 								.getContext('2d');
@@ -166,6 +170,8 @@
 								});
 						/*]]>*/
 					</script>
+					</div>
+					
 				</div>
 			</div>
 		</div>

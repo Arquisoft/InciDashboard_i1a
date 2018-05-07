@@ -48,5 +48,41 @@ public class DashboardController {
 		model.addAttribute("countStatus", countStatus);
 		return "dashboard";
 	}
+	
+	@RequestMapping("/dashboard/updateTable")
+	public String updateTableDashboard(Model model) {
+		List<Incident> incidents = incidentService.getIncidents();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String loggedUser = auth.getName();
+		model.addAttribute("loggedUser", loggedUser);
+		model.addAttribute("incidentsList", incidents);
+		return "dashboard :: tableInci";
+	}
+	
+	@RequestMapping("/dashboard/updateBarChart")
+	public String updateBarChartDashboard(Model model)
+	{
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String loggedUser = auth.getName();
+		List<Incident> incidentsList = incidentService.getIncidents();
+		Map<String, Integer> countIncidents = incidentService.getCountByTopic(incidentsList);
+		
+		model.addAttribute("loggedUser", loggedUser);
+		model.addAttribute("countIncidents", countIncidents);
+		return "dashboard :: barChartFragment";
+	}
+	
+	@RequestMapping("/dashboard/updatePieChart")
+	public String updatePieChartDashboard(Model model)
+	{
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String loggedUser = auth.getName();
+		List<Incident> incidentsList = incidentService.getIncidents();
+		Map<String, Integer> countStatus = incidentService.getCountByStatus(incidentsList);
+		
+		model.addAttribute("loggedUser", loggedUser);
+		model.addAttribute("countStatus", countStatus);
+		return "dashboard :: pieChartFragment";
+	}
 
 }
