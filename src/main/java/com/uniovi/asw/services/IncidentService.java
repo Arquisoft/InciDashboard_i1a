@@ -91,7 +91,7 @@ public class IncidentService {
 			case "FIRE":
 				i.setOperator(fireman);
 				break;
-			case "METEREOLOGICAL_PHENOMENON":
+			case "METEOROLOGICAL_PHENOMENON":
 				i.setOperator(fireman);
 				break;
 			case "ACCIDENT":
