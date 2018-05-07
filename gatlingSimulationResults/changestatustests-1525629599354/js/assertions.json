@@ -1,0 +1,10 @@
+{
+  "simulation": "gatlingTests.ChangeStatusTests",
+  "simulationId": "changestatustests",
+  "start": 1525629599354,
+  "description": "",
+  "scenarios": ["ChangeStatusTests"],
+  "assertions": [
+
+  ]
+}
