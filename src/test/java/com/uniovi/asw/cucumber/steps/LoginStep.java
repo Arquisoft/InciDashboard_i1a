@@ -48,14 +48,14 @@ public class LoginStep {
 		driver.quit();
 	}
 	
-	@Given("^an operator in homepage")
+	@Given("^an operator in homepage$")
 	public void goHomepage() {
 		// In theory it should already be on the homepage
 		driver.navigate().to(URL);
 		assertNotNull(driver.findElement(By.id("indexWelcomeText")));
 	}
 	
-	@When("^clicks on log in button")
+	@When("^clicks on log in button$")
 	public void goLogin() {
 		driver.findElement(By.id("indexLoginButton")).click();
 		assertTrue(driver.getCurrentUrl().equalsIgnoreCase(URL + "/login"));
@@ -69,7 +69,7 @@ public class LoginStep {
 		driver.findElement(By.id("loginButton")).click();
 	}
 	
-	@Then("^operator is logged in")
+	@Then("^operator is logged in$")
 	public void checkLogin() {
 		if (driver.getCurrentUrl().equalsIgnoreCase(URL + "/dashboard")) {
 			System.out.println("Cucumber login test passed correctly.");

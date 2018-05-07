@@ -47,7 +47,7 @@ public class InciDetailsStep {
 		driver.quit();
 	}
 	
-	@Given("^an operator logged in the system")
+	@Given("^an operator logged in the system$")
 	public void goHomepage() {
 		driver.navigate().to(URL + "/login");
 		assertNotNull(driver.findElement(By.id("loginText")));
@@ -57,19 +57,19 @@ public class InciDetailsStep {
 		assertTrue(driver.getCurrentUrl().equalsIgnoreCase(URL + "/dashboard"));
 	}
 	
-	@When("^clicks on incident details button")
+	@When("^clicks on incident details button$")
 	public void goLogin() {
 		driver.findElements(By.id("inciDetailsBtn")).get(1).click();
 		assertNotNull(driver.findElement(By.id("inciMap")));
 		assertNotNull(driver.findElement(By.id("inciName")));
 	}
 	
-	@Then("^operator can see details of the incident")
+	@Then("^operator can see details of the incident$")
 	public void checkLogin() {
 		if (driver.findElement(By.id("inciName")) != null) {
-			System.out.println("Cucumber login test passed correctly.");
+			System.out.println("Cucumber incident details test passed correctly.");
 		} else {
-			System.out.println("Cucumber login test failed.");
+			System.out.println("Cucumber incident details failed.");
 		}
 	}
 }
