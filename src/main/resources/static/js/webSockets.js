@@ -26,14 +26,14 @@ function updateTable(incident){
 		+ "<td>" + incident.topic + "<td>"
 		+ "<td>" + incident.operator.username + "<td>"
 		+ "<td>" + incident.status + "<td>"
-		+ "<td><div class='btn-group' role='group' aria-label='Options'>"
-			+ "<a class='btn btn-secondary' role='button' href='/incident/details/'" + incident.idautogenerado + "'>Details</a>"
-		+ "</div></td>"
+		+ "<td><div id ='options' class='btn-group' role='group' aria-label='Options'>"
+			+ "<a class='btn btn-secondary' role='button' href='/incident/details/" + incident.idautogenerado + "'>Details</a>"
+		+ "</div></td></tr>"
 	);
 	
-	if (incident.isAssignedTo(loggedUser)) {
+	if (incident.operator.username == loggedUser) {
 		$("#options").append(
-				"<a class='btn btn-secondary' role='button' href='/incident/edit/'" + incident.idautogenerado + "'>Change status</a>"
+				"<a class='btn btn-secondary' role='button' href='/incident/edit/" + incident.idautogenerado + "'>Change status</a>"
 		);
 	}
 }
