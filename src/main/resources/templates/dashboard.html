@@ -31,8 +31,13 @@
 	
 </script>
 
+<!-- Web Sockets -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+
 
 <!-- Custom styles for this template -->
 <link href="/css/custom-dashboard.css" rel="stylesheet">
@@ -68,7 +73,7 @@
 							<th scope="col">Options</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="incidentsTable">
 						<tr th:each="incident : ${incidentsList}">
 							<th scope="row" th:text="${incident.idautogenerado}">ID</th>
 							<td th:text="${incident.agent.name}">Agent name</td>
@@ -83,11 +88,12 @@
 							<td th:text="${incident.operator.username}">Incident topic</td>
 							<td th:text="${incident.status}">Incident status</td>
 							<td>
-								<div class="btn-group" role="group" aria-label="Options">
-									<a class="btn btn-secondary" role="button"
-										th:href="${'/incident/details/' + incident.idautogenerado}" id="inciDetailsBtn">Details</a>
+								<div id="options"class="btn-group" role="group" aria-label="Options">
 									<a class="btn btn-secondary" role="button" 
-										th:href="${'/incident/edit/' + incident.idautogenerado}" th:if="${incident.isAssignedTo(loggedUser)}">Change status</a>
+										th:href="${'/incident/details/' + incident.idautogenerado}">Details</a>
+									<a class="btn btn-secondary" role="button"
+										th:href="${'/incident/edit/' + incident.idautogenerado}"
+										th:if="${incident.isAssignedTo(loggedUser)}">Change status</a>
 								</div>
 							</td>
 						</tr>
@@ -269,5 +275,8 @@
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwARKHHxXQPny7hJNwu1xxJKoUP-l6O7Q&callback=initMap">
 		
 	</script>
+
+	<!-- Web Sockets -->
+	<script src="/js/webSockets.js"></script>
 </body>
 </html>
