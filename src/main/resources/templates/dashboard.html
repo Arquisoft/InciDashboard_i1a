@@ -113,7 +113,8 @@
 				</div>
 				<div class="card-body">
 
-					<div class="container" th:fragment="barChartFragment" id="barChartFragment">
+					<div class="container" th:fragment="barChartFragment"
+						id="barChartFragment">
 						<canvas id="barChart" width="150" height="150"></canvas>
 						<script type="text/javascript" th:inline="javascript">
 						/*<![CDATA[*/
@@ -171,7 +172,7 @@
 						/*]]>*/
 					</script>
 					</div>
-					
+
 				</div>
 			</div>
 		</div>
@@ -181,45 +182,45 @@
 					<h3>Status chart</h3>
 				</div>
 				<div class="card-body">
-					<div class="container">
-						<canvas id="doughChart"></canvas>
-					</div>
-					<script type="text/javascript" th:inline="javascript">
-						var config = {
-							type : 'doughnut',
-							data : {
-								datasets : [ {
-									data : [
-											"[[${countStatus.get('OPEN')}]]",
-											"[[${countStatus.get('IN_PROCESS')}]]",
-											"[[${countStatus.get('CLOSED')}]]",
-											"[[${countStatus.get('CANCELLED')}]]", ],
-									backgroundColor : [ 'rgb(255, 99, 132)',
-											'rgb(255, 205, 86)',
-											'rgb(75, 192, 192)',
-											'rgb(54, 162, 235)', ],
-									label : 'Status dataset'
-								} ],
-								labels : [ 'Open', 'In Process', 'Closed',
-										'Cancelled' ]
-							},
-							options : {
-								responsive : true,
-								legend : {
-									position : 'top',
-								},
-								animation : {
-									animateScale : true,
-									animateRotate : true
-								}
-							}
-						};
-						window.onload = function() {
+					<div class="container" th:fragment="pieChartFragment" id="pieChartFragment">
+						<canvas id="doughChart" width="150" height="150"></canvas>
+						<script type="text/javascript" th:inline="javascript">
+						/*<![CDATA[*/
 							var ctx = document.getElementById('doughChart')
 									.getContext('2d');
-							window.myDoughnut = new Chart(ctx, config);
-						};
+							var myChart = new Chart(ctx, 
+							{
+								type : 'doughnut',
+								data : {
+									datasets : [ {
+										data : [
+												"[[${countStatus.get('OPEN')}]]",
+												"[[${countStatus.get('IN_PROCESS')}]]",
+												"[[${countStatus.get('CLOSED')}]]",
+												"[[${countStatus.get('CANCELLED')}]]", ],
+										backgroundColor : [ 'rgb(255, 99, 132)',
+												'rgb(255, 205, 86)',
+												'rgb(75, 192, 192)',
+												'rgb(54, 162, 235)', ],
+										label : 'Status dataset'
+									} ],
+									labels : [ 'Open', 'In Process', 'Closed',
+											'Cancelled' ]
+								},
+								options : {
+									responsive : true,
+									legend : {
+										position : 'top',
+									},
+									animation : {
+										animateScale : true,
+										animateRotate : true
+									}
+								}
+							});
+							/*]]>*/
 					</script>
+					</div>
 				</div>
 			</div>
 		</div>

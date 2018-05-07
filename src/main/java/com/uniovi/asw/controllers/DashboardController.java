@@ -62,12 +62,9 @@ public class DashboardController {
 	@RequestMapping("/dashboard/updateBarChart")
 	public String updateBarChartDashboard(Model model)
 	{
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String loggedUser = auth.getName();
 		List<Incident> incidentsList = incidentService.getIncidents();
 		Map<String, Integer> countIncidents = incidentService.getCountByTopic(incidentsList);
 		
-		model.addAttribute("loggedUser", loggedUser);
 		model.addAttribute("countIncidents", countIncidents);
 		return "dashboard :: barChartFragment";
 	}
@@ -75,12 +72,9 @@ public class DashboardController {
 	@RequestMapping("/dashboard/updatePieChart")
 	public String updatePieChartDashboard(Model model)
 	{
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String loggedUser = auth.getName();
 		List<Incident> incidentsList = incidentService.getIncidents();
 		Map<String, Integer> countStatus = incidentService.getCountByStatus(incidentsList);
 		
-		model.addAttribute("loggedUser", loggedUser);
 		model.addAttribute("countStatus", countStatus);
 		return "dashboard :: pieChartFragment";
 	}

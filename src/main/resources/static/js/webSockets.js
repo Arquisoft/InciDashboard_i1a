@@ -7,7 +7,8 @@ function connect(){
 		stompClient.subscribe("/incident", function (data) {			
 			var incident = JSON.parse(data.body); 
 	        updateTable();
-	        updateCharts();
+	        updateBarChart();
+	        updatePieChart();
 		});		
 	});
 }
@@ -20,8 +21,11 @@ function updateTable(){
 	$("#tableInci").load("/dashboard/updateTable");
 }
 
-function updateCharts(){
+function updateBarChart(){
 	$("#barChartFragment").load("/dashboard/updateBarChart");
+}
+
+function updatePieChart(){
 	$("#pieChartFragment").load("/dashboard/updatePieChart");
 }
 
