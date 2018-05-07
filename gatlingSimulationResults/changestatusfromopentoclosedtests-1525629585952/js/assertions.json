@@ -1,0 +1,10 @@
+{
+  "simulation": "gatlingTests.ChangeStatusFromOpenToClosedTests",
+  "simulationId": "changestatusfromopentoclosedtests",
+  "start": 1525629585952,
+  "description": "",
+  "scenarios": ["ChangeStatusFromOpenToClosedTests"],
+  "assertions": [
+
+  ]
+}
