@@ -1,0 +1,10 @@
+{
+  "simulation": "gatlingTests.ChangeStatusFromInProcessToCancelTests",
+  "simulationId": "changestatusfrominprocesstocanceltests",
+  "start": 1525629566783,
+  "description": "",
+  "scenarios": ["ChangeStatusFromInProcessToCancelTests"],
+  "assertions": [
+
+  ]
+}
