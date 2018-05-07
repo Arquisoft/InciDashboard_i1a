@@ -72,6 +72,12 @@ Finally, we will execute Gatling to run the produced test.
 %GATLING_HOME%\bin\gatling.bat
 ```
 
+##### Recording HAR file
+Another way to generate an .scala file containing the test cases is through a HAR file. To record it, we have to select the web developer options in the navigator, for example Chrome. In the Network tab, we ensure that the red circle at the left is in red, and we check if i is not checked the "Preserve Logs" box. After that we try to reproduce what we want to record. Finally, when we finish, eithin the netwok tab of the web developer view, right click and Save content in HAR file.
+
+##### Adding the HAR file to the project with the Gatling Recorder
+The final step is done with Gatling recorder. We have to choose the HAR file option in the top right corner of the window. Then we give a name for the test case class generated and the output folder in our project. Automatically, Gatling will generate the .scala test case and will add it to the project.
+
 ## Cucumber integration
 Cucumber is used in the Incidence Dashboard Spring Boot project for enhancing the test section.
 
