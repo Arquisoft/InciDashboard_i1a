@@ -1,5 +1,8 @@
 package com.uniovi.asw.cucumber.steps;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import java.util.concurrent.TimeUnit;
 
 import org.junit.After;
@@ -47,18 +50,18 @@ public class InciDetailsStep {
 	@Given("^an operator logged in the system")
 	public void goHomepage() {
 		driver.navigate().to(URL + "/login");
-		driver.findElement(By.id("loginText"));
+		assertNotNull(driver.findElement(By.id("loginText")));
 		driver.findElement(By.name("username")).sendKeys("admin");
 		driver.findElement(By.name("password")).sendKeys("admin");
 		driver.findElement(By.id("loginButton")).click();
-		driver.getCurrentUrl().equalsIgnoreCase(URL + "/dashboard");
+		assertTrue(driver.getCurrentUrl().equalsIgnoreCase(URL + "/dashboard"));
 	}
 	
 	@When("^clicks on incident details button")
 	public void goLogin() {
 		driver.findElements(By.id("inciDetailsBtn")).get(1).click();
-		driver.findElement(By.id("inciMap"));
-		driver.findElement(By.id("inciName"));
+		assertNotNull(driver.findElement(By.id("inciMap")));
+		assertNotNull(driver.findElement(By.id("inciName")));
 	}
 	
 	@Then("^operator can see details of the incident")

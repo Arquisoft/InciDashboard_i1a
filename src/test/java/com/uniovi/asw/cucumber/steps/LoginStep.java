@@ -1,5 +1,8 @@
 package com.uniovi.asw.cucumber.steps;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import java.util.concurrent.TimeUnit;
 
 import org.junit.After;
@@ -49,14 +52,14 @@ public class LoginStep {
 	public void goHomepage() {
 		// In theory it should already be on the homepage
 		driver.navigate().to(URL);
-		driver.findElement(By.id("indexWelcomeText"));
+		assertNotNull(driver.findElement(By.id("indexWelcomeText")));
 	}
 	
 	@When("^clicks on log in button")
 	public void goLogin() {
 		driver.findElement(By.id("indexLoginButton")).click();
-		driver.getCurrentUrl().equalsIgnoreCase(URL + "/login");
-		driver.findElement(By.id("loginText"));
+		assertTrue(driver.getCurrentUrl().equalsIgnoreCase(URL + "/login"));
+		assertNotNull(driver.findElement(By.id("loginText")));
 	}
 	
 	@And("^fills in correctly email and password") 
