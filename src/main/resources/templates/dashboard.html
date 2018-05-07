@@ -233,6 +233,9 @@
 			</div>
 		</div>
 	</div>
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwARKHHxXQPny7hJNwu1xxJKoUP-l6O7Q">
+	</script>
 	<script th:inline=javascript>
 		/*<![CDATA[*/
 		var locations = [[${localizaciones}]];
@@ -276,12 +279,10 @@
 						imagePath : 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
 					});
 		};
+		initMap();
 		/*]]>*/
 	</script>
-	<script async defer
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwARKHHxXQPny7hJNwu1xxJKoUP-l6O7Q&callback=initMap">
-		
-	</script>
+	
 
 	<!-- Web Sockets -->
 	<script src="/js/webSockets.js"></script>

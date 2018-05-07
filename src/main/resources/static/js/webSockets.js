@@ -9,6 +9,10 @@ function connect(){
 	        updateTable();
 	        updateBarChart();
 	        updatePieChart();
+	        locations.push(incident.location);
+	        nombres.push(incident.incidentName);
+	        descripciones.push(incident.description);
+	        initMap();
 		});		
 	});
 }
