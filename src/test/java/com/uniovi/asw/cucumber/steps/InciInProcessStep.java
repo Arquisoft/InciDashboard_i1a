@@ -15,7 +15,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-public class InciCloseStep {
+public class InciInProcessStep {
 	
 	@Autowired
 	OperatorService operatorService;
@@ -41,15 +41,15 @@ public class InciCloseStep {
 		}
 	}
 	
-	@When("^changes the incident status to closed$")
+	@When("^changes the incident status to in process$")
 	public void changeStatusOpen() {
-		incident.setStatus(IncidentStatus.CLOSED);
+		incident.setStatus(IncidentStatus.IN_PROCESS);
 	}
 	
-	@Then("^the incident is closed$")
+	@Then("^the incident is in process$")
 	public void checkStatusOpen() {
-		if (incident.getStatus().equals(IncidentStatus.CLOSED)) {
-			System.out.println("Cucumber incident status closed test passed correctly.");
+		if (incident.getStatus().equals(IncidentStatus.IN_PROCESS)) {
+			System.out.println("Cucumber incident status in process test passed correctly.");
 		} else {
 			System.out.println("Cucumber incident status open failed.");
 		}

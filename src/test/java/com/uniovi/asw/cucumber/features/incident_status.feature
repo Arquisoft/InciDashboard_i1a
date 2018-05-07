@@ -11,8 +11,7 @@ Feature: Let an operator change incident status
   Scenario: Let an operator modify incident status to in process
     Given an operator logged in the system
     And one assigned incident
-    When clicks on incident change status button
-    And changes the incident status to in process
+    When changes the incident status to in process
 	Then the incident is in process
 	
   Scenario: Let an operator modify incident status to closed
