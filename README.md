@@ -1,4 +1,5 @@
 [![codecov](https://codecov.io/gh/Arquisoft/InciDashboard_i1a/branch/master/graph/badge.svg)](https://codecov.io/gh/Arquisoft/InciDashboard_i1a)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d2f21516131c4cb2b1c1b5bd48eb60a4)](https://www.codacy.com/app/jelabra/InciDashboard_i1a?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Arquisoft/InciDashboard_i1a&amp;utm_campaign=Badge_Grade)
 [![Build Status](https://travis-ci.org/Arquisoft/InciDashboard_i1a.svg?branch=master)](https://travis-ci.org/Arquisoft/InciDashboard_i1a)
 
 # InciDashboard_i1a
