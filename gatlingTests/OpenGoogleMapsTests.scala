@@ -79,5 +79,5 @@ class OpenGoogleMapsTests extends Simulation {
 			.get("/maps?q=38.05222807385176,-5.207964501096763")
 			.headers(headers_13))
 
-	setUp(scn.inject(atOnceUsers(1))).protocols(httpProtocol)
+	setUp(scn.inject(atOnceUsers(500))).protocols(httpProtocol)
 }

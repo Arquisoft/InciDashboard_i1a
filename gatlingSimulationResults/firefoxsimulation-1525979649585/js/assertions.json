@@ -1,0 +1,10 @@
+{
+  "simulation": "FirefoxSimulation",
+  "simulationId": "firefoxsimulation",
+  "start": 1525979649585,
+  "description": "",
+  "scenarios": ["FirefoxSimulation"],
+  "assertions": [
+
+  ]
+}

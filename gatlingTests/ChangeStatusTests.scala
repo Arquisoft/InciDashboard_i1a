@@ -212,5 +212,5 @@ class ChangeStatusTests extends Simulation {
 			.get(uri2 + "")
 			.headers(headers_6)))
 
-	setUp(scn.inject(atOnceUsers(1))).protocols(httpProtocol)
+	setUp(scn.inject(atOnceUsers(500))).protocols(httpProtocol)
 }

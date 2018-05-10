@@ -102,5 +102,5 @@ class AdminTests extends Simulation {
 			.get(uri2 + "")
 			.headers(headers_1))
 
-	setUp(scn.inject(atOnceUsers(1))).protocols(httpProtocol)
+	setUp(scn.inject(atOnceUsers(500))).protocols(httpProtocol)
 }

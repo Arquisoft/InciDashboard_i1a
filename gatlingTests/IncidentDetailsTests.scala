@@ -158,5 +158,5 @@ class IncidentDetailsTests extends Simulation {
 			.get("/success.txt")
 			.headers(headers_0))
 
-	setUp(scn.inject(atOnceUsers(1))).protocols(httpProtocol)
+	setUp(scn.inject(atOnceUsers(500))).protocols(httpProtocol)
 }
