@@ -7,13 +7,13 @@ Incident Dashboard reading incidents sent from the IncidentManagement module thr
 
 ## Team members
 - Pedro Blanco Suárez (UO251935)
-- Roberto Pérez Sánchez (UO250973)
+- David Ferreiro Fernández (UO250757)
 - Manuel García Fernández (UO250979)
 - Jorge González-Nuevo Bueno (UO251166)
-- David Ferreiro Fernández (UO250757)
+- Roberto Pérez Sánchez (UO250973)
 
 ## Installation of Docker Toolbox
-Docker can be installed from https://docs.docker.com/toolbox/toolbox_install_windows/. Once there, we click on the button Get Docker Toolbox for Windows. An installer will be downloaded, and then we need to execute it. The installer launches the “Setup - Docker Toolbox” dialog. Then we press on Next to accept the default options and at last, we press finsih.
+Docker can be installed from the [Docker webpage](https://docs.docker.com/toolbox/toolbox_install_windows/). Once there, we click on the button Get Docker Toolbox for Windows. An installer will be downloaded, and then we need to execute it. The installer launches the “Setup - Docker Toolbox” dialog. Then we press on Next to accept the default options and at last, we press finsih.
 The next step will be to verify the installation. To do that, we will execute the Quickstart Launch of Docker. The terminal will setup several configuration aspects for us. Then, the $ of the shell will be prompt.
 Now we can execute a command for a brief example of hello world in Docker. To do that, execute docker run hello-world and the next information will be printed on the screen.
 
@@ -45,7 +45,7 @@ Now we can execute a command for a brief example of hello world in Docker. To do
 ```
 
 ## Installation of Gatling
-We will use Gatling for testing the funcionality of the application. First of all we download it from https://gatling.io/download/. We unzip it and install it.
+We will use Gatling for testing the funcionality of the application. First of all we download it from the [Gatling webpage](https://gatling.io/download/). We unzip it and install it.
 
 #### Recorder
 To ease the creation of the scenario, we will use the Recorder, a tool provided with Gatling that allows you to record your actions on a web application and export them as a Gatling scenario. This tool is launched with a script located in the bin directory (Windows):
@@ -109,7 +109,7 @@ Get started with Cucumber in Spring Boot is as simply as adding new dependencies
 </dependency>
 ```
 
-Taking into account that in this case the wanted version is for Java with not support to lambda expressions (API 8).
+Taking into account that in this case the wanted version is for Java without support to lambda expressions (API 8).
 
 ### Behavour-Driven Development with Cucumber
 The main schema is:
