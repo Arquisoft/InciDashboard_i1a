@@ -6,11 +6,11 @@ InciDashboard_i1a
 Incident Dashboard reading incidents sent from the IncidentManagement module through Apache Kafka
 
 ## Team members
-- Pedro Blanco Suárez (UO251935)
-- David Ferreiro Fernández (UO250757)
-- Manuel García Fernández (UO250979)
-- Jorge González-Nuevo Bueno (UO251166)
-- Roberto Pérez Sánchez (UO250973)
+- [Pedro Blanco Suárez (UO251935)](https://github.com/pedrytus)  
+- [David Ferreiro Fernández (UO250757)](https://github.com/rimorD)  
+- [Manuel García Fernández (UO250979)](https://github.com/faltosu)  
+- [Jorge González-Nuevo Bueno (UO251166)](https://github.com/jorgegnb)
+- [Roberto Pérez Sánchez (UO250973)](https://github.com/robertops18) 
 
 ## Installation of Docker Toolbox
 Docker can be installed from the [Docker webpage](https://docs.docker.com/toolbox/toolbox_install_windows/). Once there, we click on the button Get Docker Toolbox for Windows. An installer will be downloaded, and then we need to execute it. The installer launches the “Setup - Docker Toolbox” dialog. Then we press on Next to accept the default options and at last, we press finsih.
