@@ -6,6 +6,8 @@
 InciDashboard_i1a
 Incident Dashboard reading incidents sent from the IncidentManagement module through Apache Kafka
 
+-InciDashboard: http://cf-azuc-docker-node-0037.az.codefresh.io:33162/  
+
 ## Team members
 - [Pedro Blanco Suárez (UO251935)](https://github.com/pedrytus)  
 - [David Ferreiro Fernández (UO250757)](https://github.com/rimorD)  
